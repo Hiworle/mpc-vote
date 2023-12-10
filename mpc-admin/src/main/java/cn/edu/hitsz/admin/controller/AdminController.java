@@ -5,14 +5,13 @@ import cn.edu.hitsz.api.entity.VoteStatus;
 import cn.edu.hitsz.api.entity.po.Candidate;
 import cn.edu.hitsz.api.entity.po.Voter;
 import cn.edu.hitsz.api.util.MPCUtils;
-import org.springframework.http.HttpRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigInteger;
 import java.util.*;
-import java.util.function.IntBinaryOperator;
 import java.util.stream.IntStream;
 
 @RestController
@@ -48,27 +47,25 @@ public class AdminController {
     private static final Map<Integer, BigInteger> tallyMap = new HashMap<>();
 
     @GetMapping("/list-voters")
-    public Map<String, Voter> getVoterList() {
+    public Collection<Voter> getVoterList() {
         if (status == VoteStatus.START) {
             // 投票人未注册完毕，投票未开始
             return null;
         }
-        return voterMap;
+        return voterMap.values();
     }
 
     @GetMapping("/register")
-    public Voter register(HttpRequest request) {
-        synchronized (voterMap) {
-            Voter voter = Voter.builder()
-                    .id(voterMap.size())
-                    .addr(request.getURI().toString())
-                    .build();
-            voterMap.putIfAbsent(request.getURI().toString(), voter);
-            if (voterMap.size() == VOTER_COUNT) {
-                status = VoteStatus.VOTING;
-            }
-            return voter;
+    public Voter register(HttpServletRequest request) {
+        Voter voter = Voter.builder()
+                .id(voterMap.size())
+                .addr(MPCUtils.parseAddr(request))
+                .build();
+        voterMap.putIfAbsent(MPCUtils.parseAddr(request), voter);
+        if (voterMap.size() == VOTER_COUNT) {
+            status = VoteStatus.VOTING;
         }
+        return voter;
     }
 
     @GetMapping("/list-candidates")
@@ -78,9 +75,9 @@ public class AdminController {
 
     // 投票人将秘密分发出去后，通过此接口通知管理中心
     @PostMapping("/vote-ok")
-    public String vote(HttpRequest request) {
+    public String voteOK(HttpServletRequest request) {
         // 记录投票完成的投票人
-        committedVoters.add(request.getURI().toString());
+        committedVoters.add(MPCUtils.parseAddr(request));
         if (committedVoters.size() == voterMap.size()) {
             status = VoteStatus.TALLYING;
             return "投票结束";
@@ -90,11 +87,11 @@ public class AdminController {
     }
 
     @PostMapping("/tally")
-    public String tally(HttpRequest request, BigInteger data) {
+    public String tally(HttpServletRequest request, BigInteger data) {
         if (status != VoteStatus.TALLYING) {
             return "计票还未开始";
         }
-        Voter voter = voterMap.get(request.getURI().toString());
+        Voter voter = voterMap.get(MPCUtils.parseAddr(request));
         if (voter == null) return "投票人不存在";
 
         tallyMap.put(voter.getId(), data);
