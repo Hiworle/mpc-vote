@@ -12,14 +12,21 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 
 @ShellComponent
 public class Commands {
 
     @Value("${mpc.admin.host}")
     private String adminHost;
+    @Value("${server.port}")
+    private String myPort;
+    @Value("${server.address}")
+    private String myHost;
+
 
     public static final int MAX_SCORE = 100;
 
@@ -48,14 +55,15 @@ public class Commands {
     }
 
     @ShellMethod(value = "Register as a voter", key = {"register", "r"})
-    public String register() {
-        return HttpUtils.httpGetRequest(
-                "http://" + adminHost + "/register"
+    public String register() throws UnsupportedEncodingException {
+        return HttpUtils.httpPostRequest(
+                "http://" + adminHost + "/register",
+                Map.of("addr", myHost + ':' + myPort)
         );
     }
 
     @ShellMethod(value = "Vote for a candidate", key = {"vote", "v"})
-    public String vote(@ShellOption(arity = 100) List<Integer> voteList) throws JsonProcessingException {
+    public String vote(@ShellOption(arity = 100) List<Integer> voteList) throws JsonProcessingException, UnsupportedEncodingException {
 
         if (mapper.readValue(status(), VoteStatus.class) != VoteStatus.VOTING) {
             return "投票阶段未开始/已结束";
@@ -77,7 +85,8 @@ public class Commands {
         // 秘密分享
         MPCUtils.secretShare(
                 voters.stream().map(voter -> "http://" + voter.getAddr() + "/vote").toList(),
-                voteList
+                voteList,
+                myHost + ':' + myPort
         );
 
         return HttpUtils.httpPostRequest(
@@ -93,7 +102,7 @@ public class Commands {
         );
     }
 
-    @ShellMethod(value = "Get vote result", key = {"result", "r"})
+    @ShellMethod(value = "Get vote result", key = {"result", "res"})
     public String result() {
         return HttpUtils.httpGetRequest(
                 "http://" + adminHost + "/result"

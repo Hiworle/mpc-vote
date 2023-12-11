@@ -2,6 +2,7 @@ package cn.edu.hitsz.api.util;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ import java.util.Map;
 import java.util.Random;
 
 public class MPCUtils {
+
+    public static final int MAX_SCORE = 100;
 
     /**
      * 分割大整数
@@ -55,15 +58,13 @@ public class MPCUtils {
      * 根据投票信息和投票人的数量生成大整数秘密
      */
     private static BigInteger generateSecret(List<Integer> voteList, int m) {
-        // 候选人的数量
-        int n = voteList.size();
 
         // 比特长度
-        int k = (int) (Math.log(m) / Math.log(2)) + 1;
+        int k = (int) (Math.log(m * MAX_SCORE) / Math.log(2)) + 1;
 
         BigInteger result = BigInteger.ZERO;
         for (int vote : voteList) {
-            result = result.add(BigInteger.valueOf(vote)).shiftLeft(k);
+            result = result.shiftLeft(k).add(BigInteger.valueOf(vote));
         }
 
         return result;
@@ -73,13 +74,17 @@ public class MPCUtils {
      * 秘密分享
      */
     public static void secretShare(List<String> targets,
-                                   List<Integer> voteList) {
+                                   List<Integer> voteList,
+                                   String addr) throws UnsupportedEncodingException {
 
         List<BigInteger> secrets = randomSplit(generateSecret(voteList, targets.size()), targets.size());
 
         for (int i = 0; i < targets.size(); i++) {
-            System.out.printf("Send [%s] to [%s]...", secrets.get(i).toString(), targets.get(i));
-            HttpUtils.httpPostRequest(targets.get(i), secrets.get(i).toString());
+            System.out.printf("Send [%s] to [%s]...\n", secrets.get(i).toString(2), targets.get(i));
+            HttpUtils.httpPostRequest(
+                    targets.get(i),
+                    Map.of("data", secrets.get(i), "addr", addr)
+            );
         }
     }
 
