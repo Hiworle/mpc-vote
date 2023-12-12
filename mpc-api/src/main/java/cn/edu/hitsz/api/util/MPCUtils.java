@@ -1,7 +1,5 @@
 package cn.edu.hitsz.api.util;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
@@ -50,10 +48,6 @@ public class MPCUtils {
 
         // 返回结果数组
         return ret;
-    }
-
-    public static String parseAddr(HttpServletRequest request) {
-        return request.getRemoteAddr() + ':' + request.getRemotePort();
     }
 
     /**
