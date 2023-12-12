@@ -18,29 +18,31 @@ public class MPCUtils {
      * 分割大整数
      *
      * @param result 投票的结果
-     * @param k      k个候选人
+     * @param n      n个候选人
+     * @param m      m个投票人
      * @return 每个候选人的票数
      */
-    public static int[] divide(BigInteger result, int k) {
+    public static int[] divide(BigInteger result,
+                               int n,
+                               int m) {
         // 将BigInteger转换为字符串
         String numString = result.toString(2);
 
         // 计算每份的位数
-        int numLength = numString.length();
-        int partLength = numLength / k;
+        int partLength = (int) (Math.log(m * MAX_SCORE) / Math.log(2)) + 1;
 
         // 创建存储结果的int数组
-        int[] ret = new int[k];
+        int[] ret = new int[n];
 
         // 将每份的数字存储到数组中
-        for (int i = 0; i < k; i++) {
+        for (int i = 0; i < n; i++) {
             // 提取每份的起始和结束索引
             int startIndex = i * partLength;
-            int endIndex = (i == k - 1) ? numLength : (i + 1) * partLength;
+            int endIndex = (i == n - 1) ? numString.length() : (i + 1) * partLength;
 
             // 截取每份的字符串并转换为int类型
             String partString = numString.substring(startIndex, endIndex);
-            int partNum = Integer.parseInt(partString);
+            int partNum = Integer.parseInt(partString, 2);
 
             // 将每份的数字存储到数组中
             ret[i] = partNum;

@@ -89,9 +89,7 @@ public class Commands {
                 myHost + ':' + myPort
         );
 
-        return HttpUtils.httpPostRequest(
-                "http://" + adminHost + "/vote-ok"
-        );
+        return "投票成功，等待计票";
     }
 
     @ShellMethod(value = "Tally votes", key = {"tally", "t"})
