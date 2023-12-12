@@ -5,11 +5,11 @@ import cn.edu.hitsz.api.entity.po.Voter;
 import cn.edu.hitsz.api.util.HttpUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -22,6 +22,10 @@ public class VoterController {
 
     @Value("${mpc.admin.host}")
     private String adminHost;
+    @Value("${server.port}")
+    private String myPort;
+    @Value("${server.address}")
+    private String myHost;
 
     private final ObjectMapper mapper = new ObjectMapper();
 
@@ -31,7 +35,7 @@ public class VoterController {
     private volatile Set<String> uncommittedAddr;
 
     @PostMapping("/vote")
-    public String vote(BigInteger data, String addr) throws JsonProcessingException {
+    public String vote(BigInteger data, String addr) throws JsonProcessingException, UnsupportedEncodingException {
         if (getStatus() != VoteStatus.VOTING) {
             return "投票阶段未开始/已结束";
         }
@@ -43,7 +47,8 @@ public class VoterController {
             uncommitted.remove(addr);
             if (uncommitted.isEmpty()) {
                 HttpUtils.httpPostRequest(
-                        "http://" + adminHost + "/vote-ok"
+                        "http://" + adminHost + "/vote-ok",
+                        Map.of("fromAddr", myHost + ':' + myPort)
                 );
             }
         }
