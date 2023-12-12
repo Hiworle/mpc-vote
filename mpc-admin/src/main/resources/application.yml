@@ -4,3 +4,7 @@ server:
 spring:
   application:
     name: mpc-admin
+
+mpc:
+  admin:
+    host: 127.0.0.1:8080

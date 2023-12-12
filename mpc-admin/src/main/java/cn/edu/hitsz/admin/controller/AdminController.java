@@ -29,15 +29,15 @@ public class AdminController {
     // 候选人列表，正式环境从数据库中获取
     private static final List<Candidate> candidateList = List.of(
             Candidate.builder()
-                    .id(1)
+                    .id(0)
                     .name("张三")
                     .build(),
             Candidate.builder()
-                    .id(2)
+                    .id(1)
                     .name("李四")
                     .build(),
             Candidate.builder()
-                    .id(3)
+                    .id(2)
                     .name("王五")
                     .build()
     );
@@ -82,9 +82,9 @@ public class AdminController {
 
     // 投票人将秘密分发出去后，通过此接口通知管理中心
     @PostMapping("/vote-ok")
-    public String voteOK(HttpServletRequest request) {
+    public String voteOK(String fromAddr) {
         // 记录投票完成的投票人
-        committedVoters.add(MPCUtils.parseAddr(request));
+        committedVoters.add(fromAddr);
         if (committedVoters.size() == voterMap.size()) {
             status = VoteStatus.TALLYING;
             voterMap.keySet().parallelStream().forEach(
@@ -106,7 +106,7 @@ public class AdminController {
             tallyMap.values().stream().reduce(BigInteger::add).ifPresent(
                     result -> {
                         voteResult.setResult(result);
-                        int[] arr = MPCUtils.divide(result, candidateList.size());
+                        int[] arr = MPCUtils.divide(result, candidateList.size(), voterMap.size());
                         IntStream.range(0, arr.length)
                                 .reduce((i, j) -> arr[i] > arr[j] ? i : j)
                                 .ifPresent(
@@ -149,5 +149,15 @@ public class AdminController {
     @GetMapping("/result")
     public VoteResult getResult() {
         return voteResult;
+    }
+
+    @PostMapping("/reset")
+    public String reset() {
+        status = VoteStatus.START;
+        voterMap.clear();
+        committedVoters.clear();
+        tallyMap.clear();
+        voteResult = null;
+        return "重置成功";
     }
 }
