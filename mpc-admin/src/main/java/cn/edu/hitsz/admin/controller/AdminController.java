@@ -45,7 +45,7 @@ public class AdminController {
     public static final List<ScoringItem> scoringItems = List.of(
             ScoringItem.builder()
                     .id(0)
-                    .name("创新型")
+                    .name("创新性")
                     .description("评估参赛项目在人工智能应用领域的创新程度。考虑项目是否引入了新的思路、方法或技术，并且能够为现有问题提供新的解决方案。")
                     .score(30)
                     .build(),
@@ -59,7 +59,7 @@ public class AdminController {
                     .id(2)
                     .name("技术复杂性")
                     .description("评估参赛项目所涉及的技术难度和复杂性。考虑项目是否在算法、模型设计或系统开发方面具有一定的挑战性，并且需要高水平的技术能力来实现。")
-                    .score(20)
+                    .score(40)
                     .build()
     );
 
@@ -143,7 +143,7 @@ public class AdminController {
             voteResult.setResult(result);
             int[][] detailedResult = new int[scoringItems.size()][];
             for (int i = 0; i < result.length; i++) {
-                int[] divide = MPCUtils.divide(result[i], candidateList.size(), voterMap.size());
+                int[] divide = MPCUtils.recoverSecret(result[i], candidateList.size(), voterMap.size());
                 detailedResult[i] = divide;
             }
             voteResult.setDetailedResult(detailedResult);

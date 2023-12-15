@@ -1,0 +1,1179 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --mermaid-theme: default; --mermaid-sequence-numbers: off; --mermaid-flowchart-curve: linear; --mermaid--gantt-left-padding: 75; --sequence-theme: simple; }
+.tooltip[data-v-70836592] { cursor: pointer; position: relative; display: block; width: 100%; text-align: center; z-index: 10; }
+.tooltip span[data-v-70836592] { border-bottom: 1px dotted; }
+.tooltip[data-v-70836592]::after { display: none; content: attr(data-tooltip); background: rgb(232, 233, 233); max-width: 500px; width: 200px; position: absolute; left: -200px; right: 0px; margin: auto; opacity: 0; height: auto; font-size: 14px; padding: 10px; border-radius: 4px; color: rgb(17, 17, 17); text-align: left; }
+.tooltip.bottom[data-v-70836592]::after { top: 80%; transition: opacity 0.3s ease 0.3s, top 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s; }
+.tooltip.bottom[data-v-70836592]:hover::after { display: block; top: 130%; opacity: 1; }
+.lifeline .line[data-v-6efc771f] { background-size: 1px 20px; }
+.zenuml .interaction { border: 0px dashed transparent; }
+.zenuml .interaction.sync { border-right-width: 7px; }
+.zenuml .interaction.inited-from-occurrence, .zenuml .interaction.self-invocation { border-left-width: 7px; }
+.zenuml .interaction.return { border-left-width: 7px; border-right-width: 7px; }
+.zenuml .interaction.return-to-start { border-left-width: 0px; }
+.zenuml .interaction:hover { cursor: pointer; }
+.zenuml .message { position: relative; }
+.zenuml .message > .name { text-align: center; }
+.zenuml .interaction.right-to-left > .occurrence { left: -14px; }
+.zenuml .interaction.self > .occurrence { left: -8px; margin-top: -10px; }
+.zenuml .fragment { border-width: 1px; margin: 8px 0px 0px; padding-bottom: 10px; }
+.zenuml .sequence-diagram * { box-sizing: inherit; }
+.zenuml .sequence-diagram { line-height: normal; }
+.zenuml .participant { border-width: 2px; padding: 8px 4px; min-width: 88px; max-width: 250px; text-align: center; pointer-events: all; }
+.no-fill svg.arrow polyline[data-v-ca07199a] { fill: none !important; }
+.async > .message > .point > svg.arrow > polyline[data-v-ca07199a] { fill: none; }
+.right-to-left.point[data-v-ca07199a] { left: 0px; right: auto; }
+.right-to-left.point > svg > polyline.right[data-v-ca07199a] { display: none; }
+.right-to-left.point > svg > polyline.left[data-v-ca07199a] { display: inline; }
+.point > svg > polyline.left[data-v-ca07199a] { display: none; }
+:root { --color-bg-base: #fff; --color-text-base: #000; --color-text-secondary: #333; --color-border-base: #000; }
+.theme-default { --color-text-base: #222; --color-border-base: #666; --color-message-arrow: #000; --color-bg-occurrence: #dedede; }
+.theme-mermaid { --color-bg-base: #fff; --color-text-base: #222; --color-border-base: #666; --color-bg-occurrence: #dedede; }
+.theme-mermaid .footer { visibility: hidden; }
+.theme-darcula { --color-bg-canvas: #ffffff; --color-bg-frame: #2b2b2b; --color-border-frame: #cccccc; --color-bg-title: #2b2b2b; --color-text-title: #f8f8f2; --color-bg-participant: #44475a; --color-text-participant: #f8f8f2; --color-border-participant: #cccccc; --color-text-message: #ffb86c; --color-message-arrow: #cccccc; --color-bg-message-hover: #a6d2ff; --color-text-message-hover: #174ad4; --color-text-comment: #666666; --color-bg-fragment-header: #44475a; --color-text-fragment: #8be9fd; --color-border-fragment: #cccccc; --color-bg-occurrence: #44475a; --color-border-occurrence: #555555; --color-text-link: #a6d2ff; --color-text-control: #e2ba88; }
+.theme-sky { --color-bg-canvas: #ffffff; --color-bg-frame: #ffffff; --color-border-frame: #cccccc; --color-bg-title: #deecfb; --color-text-title: #032c72; --color-bg-participant: #deecfb; --color-text-participant: #032c72; --color-border-participant: #032c72; --color-text-message: #032c72; --color-message-arrow: #032c72; --color-bg-message-hover: #a6d2ff; --color-text-message-hover: #174ad4; --color-text-comment: #666666; --color-bg-fragment-header: #f0f0f0; --color-text-fragment: #032c72; --color-border-fragment: #032c72; --color-bg-occurrence: #deecfb; --color-border-occurrence: #555555; --color-text-link: #a6d2ff; --color-text-control: #a6d2ff; }
+.theme-idle-afternoon { --color-bg-canvas: #d8dad9; --color-bg-frame: #d8dad9; --color-border-frame: #324939; --color-bg-title: #d8dad9; --color-text-title: #182e27; --color-bg-participant: #f3f5f7; --color-text-participant: #182e27; --color-border-participant: #182e27; --color-text-message: #030809; --color-message-arrow: #324939; --color-bg-message-hover: #aea690; --color-text-message-hover: #000000; --color-text-comment: #030809; --color-bg-fragment-header: #f0f0f0; --color-text-fragment: #182e27; --color-border-fragment: #344337; --color-bg-occurrence: #f3f5f7; --color-border-occurrence: #344337; --color-text-link: #344337; --color-text-control: #97a49b; }
+.theme-coles { --color-bg-canvas: #ffffff; --color-bg-frame: #ffde00; --color-border-frame: #ee141f; --color-bg-title: #ffffff; --color-text-title: #182e27; --color-bg-participant: #f3f5f7; --color-text-participant: #000000; --color-border-participant: #344337; --color-text-message: #000000; --color-message-arrow: #000000; --color-bg-message-hover: #ee141f; --color-text-message-hover: #ffffff; --color-text-comment: #000000; --color-bg-fragment-header: #ee141f; --color-text-fragment: #ffffff; --color-border-fragment: #ee141f; --color-bg-occurrence: #f3f5f7; --color-border-occurrence: #344337; --color-text-link: #344337; --color-text-control: #97a49b; }
+.theme-coles .footer { background-color: rgb(255, 255, 255); }
+.theme-woolworths { --color-bg-canvas: #e6eaf3; --color-bg-frame: #e6eaf3; --color-border-frame: #049e50; --color-bg-title: #ffffff; --color-text-title: #12522f; --color-bg-participant: #aacb51; --color-text-participant: #000000; --color-border-participant: #344337; --color-text-message: #12522f; --color-message-arrow: #049e50; --color-bg-message-hover: #fffefb; --color-text-message-hover: #ffffff; --color-text-comment: #000000; --color-bg-fragment-header: #aacb51; --color-text-fragment: #12522f; --color-border-fragment: #049e50; --color-bg-occurrence: #aacb51; --color-border-occurrence: #344337; --color-text-link: #344337; --color-text-control: #335c80; }
+.theme-anz { --color-bg-canvas: #ffffff; --color-bg-frame: #ffffff; --color-border-frame: #089fd8; --color-bg-title: #ffffff; --color-text-title: #006e9c; --color-bg-participant: #fcfdf8; --color-text-participant: #00abd8; --color-border-participant: #00abd8; --color-text-message: #42a4e0; --color-message-arrow: #089fd8; --color-bg-message-hover: #006e9c; --color-text-message-hover: #ffffff; --color-text-comment: #000000; --color-bg-fragment-header: #42a4e0; --color-text-fragment: #006e9c; --color-border-fragment: #089fd8; --color-bg-occurrence: #fcfdf8; --color-border-occurrence: #006e9c; --color-text-link: #c9d8e7; --color-text-control: #335c80; }
+.theme-anz .fragment .header { color: rgb(255, 255, 255); }
+.theme-nab { --color-bg-canvas: #f2f4f6; --color-bg-participant: #c30000; --color-text-participant: #ffffff; --color-border-participant: #c30000; --color-text-message: #c30000; --color-bg-fragment-header: #c30000; --color-text-fragment-header: #ffffff; }
+.theme-google { --color-white: #ffffff; --color-red-google: #db4437; --color-blue-google: #4285f4; --color-green-google: #0f9d58; --color-yellow-google: #f4b400; --color-bg-canvas: var(--color-white); --color-bg-frame: #f2f4f6; --color-border-frame: #4285f4; --color-bg-title: #4285f4; --color-text-title: #ffffff; --color-bg-participant: var(--color-red-google); --color-text-participant: #ffffff; --color-border-participant: #4285f4; --color-text-message: var(--color-red-google); --color-message-arrow: var(--color-red-google); --color-bg-message-hover: #fffefb; --color-text-message-hover: #ffffff; --color-text-comment: #000000; --color-bg-fragment-header: var(--color-green-google); --color-text-fragment: #ffffff; --color-border-fragment: #4285f4; --color-bg-occurrence: #f4b400; --color-border-occurrence: #4285f4; --color-text-link: #c9d8e7; --color-text-control: #335c80; }
+*, ::before, ::after { --tw-border-spacing-x: 0; --tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; }
+::-webkit-backdrop { --tw-border-spacing-x: 0; --tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; }
+::backdrop { --tw-border-spacing-x: 0; --tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; }
+.container { width: 100%; }
+@media (min-width: 640px) {
+  .container { max-width: 640px; }
+}
+@media (min-width: 768px) {
+  .container { max-width: 768px; }
+}
+@media (min-width: 1024px) {
+  .container { max-width: 1024px; }
+}
+@media (min-width: 1280px) {
+  .container { max-width: 1280px; }
+}
+@media (min-width: 1536px) {
+  .container { max-width: 1536px; }
+}
+.zenuml .sr-only { position: absolute; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px; }
+.zenuml .pointer-events-none { pointer-events: none; }
+.zenuml .pointer-events-auto { pointer-events: auto; }
+.zenuml .invisible { visibility: hidden; }
+.zenuml .fixed { position: fixed; }
+.zenuml .absolute { position: absolute; }
+.zenuml .relative { position: relative; }
+.zenuml .sticky { position: sticky; }
+.zenuml .inset-0 { inset: 0px; }
+.zenuml .bottom-1 { bottom: 0.25rem; }
+.zenuml .left-1 { left: 0.25rem; }
+.zenuml .right-1 { right: 0.25rem; }
+.zenuml .top-0 { top: 0px; }
+.zenuml .top-8 { top: 2rem; }
+.zenuml .left-1\/2 { left: 50%; }
+.zenuml .right-0 { right: 0px; }
+.zenuml .right-\[100\%\] { right: 100%; }
+.zenuml .left-full { left: 100%; }
+.zenuml .z-40 { z-index: 40; }
+.zenuml .z-10 { z-index: 10; }
+.zenuml .col-span-2 { grid-column: span 2 / span 2; }
+.zenuml .col-span-1 { grid-column: span 1 / span 1; }
+.zenuml .col-span-4 { grid-column: span 4 / span 4; }
+.zenuml .float-right { float: right; }
+.zenuml .m-1 { margin: 0.25rem; }
+.zenuml .m-2 { margin: 0.5rem; }
+.zenuml .m-auto { margin: auto; }
+.zenuml .mx-auto { margin-left: auto; margin-right: auto; }
+.zenuml .mx-2 { margin-left: 0.5rem; margin-right: 0.5rem; }
+.zenuml .-my-px { margin-top: -1px; margin-bottom: -1px; }
+.zenuml .ml-3 { margin-left: 0.75rem; }
+.zenuml .mr-1 { margin-right: 0.25rem; }
+.zenuml .ml-4 { margin-left: 1rem; }
+.zenuml .mt-3 { margin-top: 0.75rem; }
+.zenuml .mt-4 { margin-top: 1rem; }
+.zenuml .mb-4 { margin-bottom: 1rem; }
+.zenuml .mt-8 { margin-top: 2rem; }
+.zenuml .-mt-12 { margin-top: -3rem; }
+.zenuml .mt-1 { margin-top: 0.25rem; }
+.zenuml .mb-0 { margin-bottom: 0px; }
+.zenuml .mt-2 { margin-top: 0.5rem; }
+.zenuml .box-border { box-sizing: border-box; }
+.zenuml .block { display: block; }
+.zenuml .inline-block { display: inline-block; }
+.zenuml .inline { display: inline; }
+.zenuml .flex { display: flex; }
+.zenuml .inline-flex { display: inline-flex; }
+.zenuml .table { display: table; }
+.zenuml .grid { display: grid; }
+.zenuml .contents { display: contents; }
+.zenuml .hidden { display: none; }
+.zenuml .h-10 { height: 2.5rem; }
+.zenuml .h-5 { height: 1.25rem; }
+.zenuml .h-0 { height: 0px; }
+.zenuml .h-screen { height: 100vh; }
+.zenuml .h-full { height: 100%; }
+.zenuml .h-4 { height: 1rem; }
+.zenuml .h-6 { height: 1.5rem; }
+.zenuml .h-12 { height: 3rem; }
+.zenuml .h-8 { height: 2rem; }
+.zenuml .h-14 { height: 3.5rem; }
+.zenuml .h-3 { height: 0.75rem; }
+.zenuml .min-h-screen { min-height: 100vh; }
+.zenuml .min-h-\[1em\] { min-height: 1em; }
+.zenuml .w-full { width: 100%; }
+.zenuml .w-96 { width: 24rem; }
+.zenuml .w-28 { width: 7rem; }
+.zenuml .w-4 { width: 1rem; }
+.zenuml .w-6 { width: 1.5rem; }
+.zenuml .w-8 { width: 2rem; }
+.zenuml .w-11\/12 { width: 91.6667%; }
+.zenuml .w-px { width: 1px; }
+.zenuml .w-3 { width: 0.75rem; }
+.zenuml .min-w-\[100px\] { min-width: 100px; }
+.zenuml .max-w-full { max-width: 100%; }
+.zenuml .max-w-7xl { max-width: 80rem; }
+.zenuml .flex-shrink-0, .zenuml .shrink-0 { flex-shrink: 0; }
+.zenuml .flex-grow, .zenuml .grow { flex-grow: 1; }
+.zenuml .origin-top-left { transform-origin: left top; }
+.zenuml .-translate-x-1\/2 { --tw-translate-x: -50%; transform: translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+.zenuml .-translate-y-full { --tw-translate-y: -100%; transform: translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+.zenuml .-translate-y-8 { --tw-translate-y: -2rem; transform: translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+.zenuml .-translate-x-full { --tw-translate-x: -100%; transform: translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+.zenuml .-translate-y-1\/2 { --tw-translate-y: -50%; transform: translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+.zenuml .translate-y-1\/2 { --tw-translate-y: 50%; transform: translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+.zenuml .transform { transform: translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+.zenuml .cursor-pointer { cursor: pointer; }
+.zenuml .select-none { user-select: none; }
+.zenuml .resize { resize: both; }
+.zenuml .grid-cols-6 { grid-template-columns: repeat(6, minmax(0px, 1fr)); }
+.zenuml .grid-cols-4 { grid-template-columns: repeat(4, minmax(0px, 1fr)); }
+.zenuml .grid-cols-1 { grid-template-columns: repeat(1, minmax(0px, 1fr)); }
+.zenuml .flex-row-reverse { flex-direction: row-reverse; }
+.zenuml .flex-col { flex-direction: column; }
+.zenuml .flex-nowrap { flex-wrap: nowrap; }
+.zenuml .items-start { align-items: flex-start; }
+.zenuml .items-end { align-items: flex-end; }
+.zenuml .items-center { align-items: center; }
+.zenuml .justify-center { justify-content: center; }
+.zenuml .justify-between { justify-content: space-between; }
+.zenuml .justify-around { justify-content: space-around; }
+.zenuml .gap-5 { gap: 1.25rem; }
+.zenuml .overflow-hidden { overflow: hidden; }
+.zenuml .overflow-visible { overflow: visible; }
+.zenuml .overflow-y-auto { overflow-y: auto; }
+.zenuml .whitespace-normal { white-space: normal; }
+.zenuml .whitespace-nowrap { white-space: nowrap; }
+.zenuml .rounded { border-radius: 0.25rem; }
+.zenuml .rounded-sm { border-radius: 0.125rem; }
+.zenuml .rounded-md { border-radius: 0.375rem; }
+.zenuml .rounded-lg { border-radius: 0.5rem; }
+.zenuml .rounded-t { border-top-left-radius: 0.25rem; border-top-right-radius: 0.25rem; }
+.zenuml .rounded-t-md { border-top-left-radius: 0.375rem; border-top-right-radius: 0.375rem; }
+.zenuml .rounded-b-md { border-bottom-right-radius: 0.375rem; border-bottom-left-radius: 0.375rem; }
+.zenuml .border-2 { border-width: 2px; }
+.zenuml .border { border-width: 1px; }
+.zenuml .border-b-2 { border-bottom-width: 2px; }
+.zenuml .border-b { border-bottom-width: 1px; }
+.zenuml .border-t { border-top-width: 1px; }
+.zenuml .border-r { border-right-width: 1px; }
+.zenuml .border-solid { border-style: solid; }
+.zenuml .border-dashed { border-style: dashed; }
+.zenuml .border-red-900 { --tw-border-opacity: 1; border-color: rgb(127 29 29 / var(--tw-border-opacity)); }
+.zenuml .border-skin-frame { border-color: var(--color-border-frame, var(--color-border-base, #000)); }
+.zenuml .border-gray-200 { --tw-border-opacity: 1; border-color: rgb(229 231 235 / var(--tw-border-opacity)); }
+.zenuml .border-skin-participant { border-color: var(--color-border-participant, var(--color-border-frame, var(--color-border-base, #000))); }
+.zenuml .border-skin-fragment { border-color: var(--color-border-fragment, var(--color-border-frame, var(--color-border-base, #000))); }
+.zenuml .border-skin-message-arrow { border-color: var(--color-message-arrow, var(--color-border-frame, var(--color-border-base, #000))); }
+.zenuml .border-skin-occurrence { border-color: var(--color-border-occurrence, var(--color-border-frame, var(--color-border-base, #000))); }
+.zenuml .bg-gray-50 { --tw-bg-opacity: 1; background-color: rgb(249 250 251 / var(--tw-bg-opacity)); }
+.zenuml .bg-skin-canvas { background-color: var(--color-bg-canvas, var(--color-bg-base, #fff)); }
+.zenuml .bg-skin-frame { background-color: var(--color-bg-frame, var(--color-bg-canvas, var(--color-bg-base, #fff))); }
+.zenuml .bg-skin-title { background-color: var(--color-bg-title, var(--color-bg-frame, var(--color-bg-canvas, var(--color-bg-base, #fff)))); }
+.zenuml .bg-skin-base { background-color: var(--color-bg-base); }
+.zenuml .bg-green-200 { --tw-bg-opacity: 1; background-color: rgb(187 247 208 / var(--tw-bg-opacity)); }
+.zenuml .bg-white { --tw-bg-opacity: 1; background-color: rgb(255 255 255 / var(--tw-bg-opacity)); }
+.zenuml .bg-gray-500 { --tw-bg-opacity: 1; background-color: rgb(107 114 128 / var(--tw-bg-opacity)); }
+.zenuml .bg-skin-lifeline { background-color: var(--color-border-participant, var(--color-border-participant, var(--color-border-frame, var(--color-border-base, #000)))); }
+.zenuml .bg-skin-participant { background-color: var(--color-bg-participant, var(--color-bg-frame, var(--color-bg-canvas, var(--color-bg-base, #fff)))); }
+.zenuml .bg-gray-400 { --tw-bg-opacity: 1; background-color: rgb(156 163 175 / var(--tw-bg-opacity)); }
+.zenuml .bg-skin-divider { background-color: var(--color-border-participant, var(--color-border-frame, var(--color-border-base, #000))); }
+.zenuml .bg-skin-fragment-header { background-color: var(--color-bg-fragment-header, transparent); }
+.zenuml .bg-skin-occurrence { background-color: var(--color-bg-occurrence, var(--color-bg-participant, var(--color-bg-frame, var(--color-bg-canvas, var(--color-bg-base, #fff))))); }
+.zenuml .bg-opacity-75 { --tw-bg-opacity: 0.75; }
+.zenuml .fill-current { fill: currentcolor; }
+.zenuml .fill-none { fill: none; }
+.zenuml .stroke-current { stroke: currentcolor; }
+.zenuml .stroke-2 { stroke-width: 2; }
+.zenuml .object-contain { object-fit: contain; }
+.zenuml .p-1 { padding: 0.25rem; }
+.zenuml .p-2 { padding: 0.5rem; }
+.zenuml .p-0 { padding: 0px; }
+.zenuml .px-1 { padding-left: 0.25rem; padding-right: 0.25rem; }
+.zenuml .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+.zenuml .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+.zenuml .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+.zenuml .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.zenuml .px-4 { padding-left: 1rem; padding-right: 1rem; }
+.zenuml .py-5 { padding-top: 1.25rem; padding-bottom: 1.25rem; }
+.zenuml .px-px { padding-left: 1px; padding-right: 1px; }
+.zenuml .pb-8 { padding-bottom: 2rem; }
+.zenuml .pt-8 { padding-top: 2rem; }
+.zenuml .pt-4 { padding-top: 1rem; }
+.zenuml .pb-20 { padding-bottom: 5rem; }
+.zenuml .pb-4 { padding-bottom: 1rem; }
+.zenuml .pb-32 { padding-bottom: 8rem; }
+.zenuml .pb-2 { padding-bottom: 0.5rem; }
+.zenuml .pr-24 { padding-right: 6rem; }
+.zenuml .pt-24 { padding-top: 6rem; }
+.zenuml .pb-10 { padding-bottom: 2.5rem; }
+.zenuml .pr-1 { padding-right: 0.25rem; }
+.zenuml .text-left { text-align: left; }
+.zenuml .text-center { text-align: center; }
+.zenuml .align-bottom { vertical-align: bottom; }
+.zenuml .text-xs { font-size: 0.75rem; line-height: 1rem; }
+.zenuml .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.zenuml .text-base { font-size: 1rem; line-height: 1.5rem; }
+.zenuml .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+.zenuml .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.zenuml .font-bold { font-weight: 700; }
+.zenuml .font-semibold { font-weight: 600; }
+.zenuml .font-medium { font-weight: 500; }
+.zenuml .font-thin { font-weight: 100; }
+.zenuml .italic { font-style: italic; }
+.zenuml .leading-6 { line-height: 1.5rem; }
+.zenuml .leading-4 { line-height: 1rem; }
+.zenuml .text-skin-title { color: var(--color-text-title, var(--color-text-message, var(--color-text-base, #000))); }
+.zenuml .text-skin-control { color: var(--color-text-control, var(--color-text-secondary, var(--color-text-base, #000))); }
+.zenuml .text-skin-link { color: var(--color-text-link, var(--color-text-secondary, var(--color-text-base, #000))); }
+.zenuml .text-green-700 { --tw-text-opacity: 1; color: rgb(21 128 61 / var(--tw-text-opacity)); }
+.zenuml .text-white { --tw-text-opacity: 1; color: rgb(255 255 255 / var(--tw-text-opacity)); }
+.zenuml .text-gray-900 { --tw-text-opacity: 1; color: rgb(17 24 39 / var(--tw-text-opacity)); }
+.zenuml .text-gray-400 { --tw-text-opacity: 1; color: rgb(156 163 175 / var(--tw-text-opacity)); }
+.zenuml .text-gray-600 { --tw-text-opacity: 1; color: rgb(75 85 99 / var(--tw-text-opacity)); }
+.zenuml .text-gray-500 { --tw-text-opacity: 1; color: rgb(107 114 128 / var(--tw-text-opacity)); }
+.zenuml .text-skin-participant { color: var(--color-text-participant, var(--color-text-message, var(--color-text-base, #000))); }
+.zenuml .text-skin-base { color: var(--color-text-base); }
+.zenuml .text-skin-message { color: var(--color-text-message, var(--color-text-base, #000)); }
+.zenuml .text-skin-comment { color: var(--color-text-comment, var(--color-text-secondary, var(--color-text-base, #000))); }
+.zenuml .text-skin-fragment-header { color: var(--color-text-fragment-header, var(--color-text-message, #000)); }
+.zenuml .text-skin-fragment { color: var(--color-text-fragment, var(--color-text-message, #000)); }
+.zenuml .text-skin-message-arrow { color: var(--color-message-arrow, var(--color-border-frame, var(--color-border-base, #000))); }
+.zenuml .opacity-50 { opacity: 0.5; }
+.zenuml .shadow-sm { --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color); box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),var(--tw-ring-shadow, 0 0 #0000),var(--tw-shadow); }
+.zenuml .shadow-xl { --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color); box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),var(--tw-ring-shadow, 0 0 #0000),var(--tw-shadow); }
+.zenuml .shadow { --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color); box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),var(--tw-ring-shadow, 0 0 #0000),var(--tw-shadow); }
+.zenuml .shadow-slate-500\/50 { --tw-shadow-color: rgb(100 116 139 / 0.5); --tw-shadow: var(--tw-shadow-colored); }
+.zenuml .blur { --tw-blur: blur(8px); filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow); }
+.zenuml .grayscale { --tw-grayscale: grayscale(100%); filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow); }
+.zenuml .filter { filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow); }
+.zenuml .transition { transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 0.15s; }
+.zenuml .transition-opacity { transition-property: opacity; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 0.15s; }
+.zenuml .transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 0.15s; }
+.zenuml .hover\:whitespace-normal:hover { white-space: normal; }
+.zenuml .hover\:bg-yellow-300:hover { --tw-bg-opacity: 1; background-color: rgb(253 224 71 / var(--tw-bg-opacity)); }
+.zenuml .hover\:bg-gray-100:hover { --tw-bg-opacity: 1; background-color: rgb(243 244 246 / var(--tw-bg-opacity)); }
+.zenuml .hover\:bg-skin-message-hover:hover { background-color: var(--color-bg-message-hover, var(--color-text-base, #000)); }
+.zenuml .hover\:text-gray-600:hover { --tw-text-opacity: 1; color: rgb(75 85 99 / var(--tw-text-opacity)); }
+.zenuml .hover\:text-gray-500:hover { --tw-text-opacity: 1; color: rgb(107 114 128 / var(--tw-text-opacity)); }
+.zenuml .hover\:text-skin-message-hover:hover { color: var(--color-text-message-hover, var(--color-bg-base, #fff)); }
+.zenuml .hover\:opacity-100:hover { opacity: 1; }
+.zenuml .focus\:outline-none:focus { outline: transparent solid 2px; outline-offset: 2px; }
+.zenuml .focus\:ring-2:focus { --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color); --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color); box-shadow: var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow, 0 0 #0000); }
+.zenuml .focus\:ring-inset:focus { --tw-ring-inset: inset; }
+.zenuml .focus\:ring-indigo-500:focus { --tw-ring-opacity: 1; --tw-ring-color: rgb(99 102 241 / var(--tw-ring-opacity)); }
+.zenuml .group:hover .group-hover\:flex { display: flex; }
+.zenuml .group:hover .group-hover\:hidden { display: none; }
+@media (min-width: 640px) {
+  .zenuml .sm\:my-8 { margin-top: 2rem; margin-bottom: 2rem; }
+  .zenuml .sm\:block { display: block; }
+  .zenuml .sm\:inline-block { display: inline-block; }
+  .zenuml .sm\:h-screen { height: 100vh; }
+  .zenuml .sm\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0px, 1fr)); }
+  .zenuml .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0px, 1fr)); }
+  .zenuml .sm\:gap-6 { gap: 1.5rem; }
+  .zenuml .sm\:p-2 { padding: 0.5rem; }
+  .zenuml .sm\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .zenuml .sm\:align-middle { vertical-align: middle; }
+}
+@media (min-width: 1024px) {
+  .zenuml .lg\:mx-auto { margin-left: auto; margin-right: auto; }
+  .zenuml .lg\:mx-0 { margin-left: 0px; margin-right: 0px; }
+  .zenuml .lg\:max-w-none { max-width: none; }
+  .zenuml .lg\:grid-cols-8 { grid-template-columns: repeat(8, minmax(0px, 1fr)); }
+  .zenuml .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0px, 1fr)); }
+  .zenuml .lg\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+}
+.zenuml .\[\&\>svg\]\:h-full > svg { height: 100%; }
+.zenuml .\[\&\>svg\]\:w-full > svg { width: 100%; }
+.zenuml *, .zenuml ::before, .zenuml ::after { box-sizing: border-box; border-width: 0px; border-style: solid; border-color: rgb(229, 231, 235); }
+.zenuml ::before, .zenuml ::after { --tw-content: ""; }
+.zenuml html { line-height: 1.5; text-size-adjust: 100%; tab-size: 4; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; font-feature-settings: normal; }
+.zenuml body { margin: 0px; line-height: inherit; }
+.zenuml hr { height: 0px; color: inherit; border-top-width: 1px; }
+.zenuml abbr:where([title]) { text-decoration: underline dotted; }
+.zenuml h1, .zenuml h2, .zenuml h3, .zenuml h4, .zenuml h5, .zenuml h6 { font-size: inherit; font-weight: inherit; }
+.zenuml a { color: inherit; text-decoration: inherit; }
+.zenuml b, .zenuml strong { font-weight: bolder; }
+.zenuml code, .zenuml kbd, .zenuml samp, .zenuml pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 1em; }
+.zenuml small { font-size: 80%; }
+.zenuml sub, .zenuml sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+.zenuml sub { bottom: -0.25em; }
+.zenuml sup { top: -0.5em; }
+.zenuml table { text-indent: 0px; border-color: inherit; border-collapse: collapse; }
+.zenuml button, .zenuml input, .zenuml optgroup, .zenuml select, .zenuml textarea { font-family: inherit; font-size: 100%; font-weight: inherit; line-height: inherit; color: inherit; margin: 0px; padding: 0px; }
+.zenuml button, .zenuml select { text-transform: none; }
+.zenuml button, .zenuml [type="button"], .zenuml [type="reset"], .zenuml [type="submit"] { appearance: button; background-color: transparent; background-image: none; }
+.zenuml progress { vertical-align: baseline; }
+.zenuml ::-webkit-inner-spin-button, .zenuml ::-webkit-outer-spin-button { height: auto; }
+.zenuml [type="search"] { appearance: textfield; outline-offset: -2px; }
+.zenuml ::-webkit-search-decoration { appearance: none; }
+.zenuml ::-webkit-file-upload-button { appearance: button; font: inherit; }
+.zenuml summary { display: list-item; }
+.zenuml blockquote, .zenuml dl, .zenuml dd, .zenuml h1, .zenuml h2, .zenuml h3, .zenuml h4, .zenuml h5, .zenuml h6, .zenuml hr, .zenuml figure, .zenuml p, .zenuml pre { margin: 0px; }
+.zenuml fieldset { margin: 0px; padding: 0px; }
+.zenuml legend { padding: 0px; }
+.zenuml ol, .zenuml ul, .zenuml menu { list-style: none; margin: 0px; padding: 0px; }
+.zenuml textarea { resize: vertical; }
+.zenuml input::placeholder, .zenuml textarea::placeholder { opacity: 1; color: rgb(156, 163, 175); }
+.zenuml button, .zenuml [role="button"] { cursor: pointer; }
+.zenuml :disabled { cursor: default; }
+.zenuml img, .zenuml svg, .zenuml video, .zenuml canvas, .zenuml audio, .zenuml iframe, .zenuml embed, .zenuml object { display: block; vertical-align: middle; }
+.zenuml img, .zenuml video { max-width: 100%; height: auto; }
+.zenuml [hidden] { display: none; }
+pre.zenuml { margin: 0px; }
+.zenuml { font-family: Helvetica, Verdana, serif; font-size: 16px; }
+.zenuml .frame .sequence-diagram .comments code { background-color: rgb(249, 242, 244); padding: 2px; margin: 1px 0px; border-radius: 2px; }
+.zenuml .frame .sequence-diagram .comments .rest-api .http-method-post { color: rgb(13, 75, 59); }
+.zenuml .frame .sequence-diagram .comments .rest-api .http-method-get { color: rgb(47, 61, 137); }
+.zenuml .frame .sequence-diagram .comments .rest-api .http-method-delete { color: rgb(126, 30, 35); }
+.zenuml .frame .sequence-diagram .comments ol, .zenuml .frame .sequence-diagram .comments ul { margin: 0px; padding-left: 20px; }
+.zenuml .frame .sequence-diagram .comments ul li { list-style-type: none; }
+.zenuml .frame .sequence-diagram .comments ul li input[type="checkbox"] { margin-left: -1em; }
+.zenuml .frame .sequence-diagram .comments table { border-collapse: collapse; border-spacing: 0px; empty-cells: show; border-color: rgb(203, 203, 203); }
+.zenuml .frame .sequence-diagram .comments table td, .zenuml .frame .sequence-diagram .comments table th { padding: 0.5em; }
+.zenuml .frame .sequence-diagram .comments table thead { background-color: rgb(224, 224, 224); }
+.zenuml .frame .sequence-diagram .comments table td { background-color: transparent; }
+.zenuml .theme-blue .sequence-diagram .divider .name { border-radius: 4px; border: 1px solid rgb(226, 133, 83); color: rgb(226, 133, 83); }
+.zenuml .theme-blue .sequence-diagram .divider .left, .zenuml .theme-blue .sequence-diagram .divider .right { background: rgb(226, 133, 83); }
+.zenuml .theme-blue .sequence-diagram .lifeline .participant { border-color: rgb(3, 44, 114); background: rgba(146, 192, 240, 0.3); }
+.zenuml .theme-blue .sequence-diagram .lifeline .participant label { color: rgb(3, 44, 114); }
+.zenuml .theme-blue .sequence-diagram .lifeline .line { border-left-color: rgb(3, 44, 114); }
+.zenuml .theme-blue .sequence-diagram .message { border-bottom-color: rgb(3, 44, 114); }
+.zenuml .theme-blue .sequence-diagram .message .name { color: rgb(3, 44, 114); }
+.zenuml .theme-blue .sequence-diagram .message svg polyline { stroke: rgb(3, 44, 114); }
+.zenuml .theme-blue .sequence-diagram .message svg polyline.head { fill: rgb(3, 44, 114); }
+.zenuml .theme-blue .sequence-diagram .occurrence { border-color: rgb(3, 44, 114); background-color: rgb(255, 255, 255); }
+.zenuml .theme-blue .sequence-diagram .fragment { border-radius: 4px; border-color: rgba(4, 46, 110, 0.3); }
+.zenuml .theme-blue .sequence-diagram .fragment .header .name { background: rgba(4, 46, 110, 0.1); }
+.zenuml .theme-blue .sequence-diagram .fragment .header label { color: rgb(3, 44, 114); }
+.zenuml .theme-black-white .sequence-diagram .divider .name { border-radius: 0px; border-color: rgb(0, 0, 0); box-shadow: rgb(0, 0, 0) 2px 2px; }
+.zenuml .theme-black-white .sequence-diagram .divider .left, .zenuml .theme-black-white .sequence-diagram .divider .right { background: rgb(0, 0, 0); }
+.zenuml .theme-black-white .sequence-diagram .lifeline .participant { border-color: rgb(0, 0, 0); background: rgb(255, 255, 255); box-shadow: rgb(0, 0, 0) 2px 2px; }
+.zenuml .theme-black-white .sequence-diagram .lifeline .line { border-left-color: rgba(0, 0, 0, 0.4); }
+.zenuml .theme-black-white .sequence-diagram .message { border-bottom-color: rgb(0, 0, 0); }
+.zenuml .theme-black-white .sequence-diagram .message .name { color: rgb(0, 0, 0); }
+.zenuml .theme-black-white .sequence-diagram .message svg polyline { stroke: rgb(0, 0, 0); }
+.zenuml .theme-black-white .sequence-diagram .message svg polyline.head { fill: rgb(0, 0, 0); }
+.zenuml .theme-black-white .sequence-diagram .occurrence { border-color: rgb(0, 0, 0); background-color: rgb(245, 245, 245); }
+.zenuml .theme-black-white .sequence-diagram .fragment { border-color: rgba(0, 0, 0, 0.3); }
+.zenuml .theme-black-white .sequence-diagram .fragment .header .name { background: rgba(0, 0, 0, 0.07); }
+.zenuml .theme-star-uml .sequence-diagram .lifeline .participant { border-color: rgb(185, 64, 101); background-color: rgb(255, 254, 200); }
+.zenuml .theme-star-uml .sequence-diagram .lifeline .line { border-left-color: rgb(185, 64, 101); }
+.zenuml .theme-star-uml .sequence-diagram .message { border-bottom-color: rgb(185, 64, 101); }
+.zenuml .theme-star-uml .sequence-diagram .message svg polyline { stroke: rgb(185, 64, 101); }
+.zenuml .theme-star-uml .sequence-diagram .message svg polyline.head { fill: rgb(185, 64, 101); }
+.zenuml .theme-star-uml .sequence-diagram .occurrence { background-color: rgb(255, 254, 200); border-color: rgb(185, 64, 101); }
+.zenuml .blue-river .sequence-diagram { color: rgb(84, 82, 246); }
+.zenuml .blue-river .sequence-diagram .life-line-layer .lifeline.actor .participant::before { filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%); }
+.zenuml .blue-river .sequence-diagram .life-line-layer .participant { background: rgb(32, 151, 247); box-shadow: rgb(131, 196, 248) 4px 4px; border-radius: 9px; color: rgb(255, 255, 255); }
+.zenuml .blue-river .sequence-diagram .life-line-layer .participant .interface { font-size: 0.8em; }
+.zenuml .blue-river .sequence-diagram .life-line-layer .line { border-left-color: rgb(32, 151, 247); }
+.zenuml .blue-river .sequence-diagram .message-layer .message { border-bottom-color: rgb(32, 151, 247); }
+.zenuml .blue-river .sequence-diagram .message-layer .message svg.arrow polyline { stroke: rgb(32, 151, 247); fill: rgb(32, 151, 247); }
+.zenuml .blue-river .sequence-diagram .message-layer .message.self svg.arrow polyline { fill: none; }
+.zenuml .blue-river .sequence-diagram .message-layer .message.self svg.arrow polyline.head { fill: rgb(32, 151, 247); }
+.zenuml .blue-river .sequence-diagram .message-layer .occurrence { background: rgb(229, 253, 232); border-color: rgb(101, 191, 115); box-shadow: rgb(147, 198, 155) 4px 4px; }
+.zenuml .blue-river .sequence-diagram .message-layer .fragment { border-color: rgb(32, 151, 247); }
+.zenuml .blue-river .sequence-diagram .message-layer .fragment .header .name label { display: inline-block; min-width: 50px; background: rgb(84, 82, 246); color: rgb(255, 255, 255); padding: 2px 0px 2px 10px; }
+.zenuml .blue-river .sequence-diagram .message-layer .fragment .header .name::after { content: "SO"; display: inline-block; background: rgb(84, 82, 246); margin-left: -23px; width: 34px; transform: translateY(-2px); height: 22px; clip-path: polygon(66% 0px, 100% 0px, 100% 66%, 66% 100%); }
+.zenuml .blue-river .sequence-diagram .message-layer .fragment .header > label { display: inline-block; min-width: 50px; font-weight: 700; color: rgb(255, 255, 255); background: rgb(101, 191, 115); }
+.zenuml .blue-river .sequence-diagram .message-layer .fragment .comments { border-color: inherit; }
+.zenuml .blue-river .sequence-diagram .message-layer .fragment .divider { border-bottom-color: inherit; }
+:root { --background: #282a36; --hover: #2b2b2b; --occurance-border: #6e7191; --border: #585b74; --white: #f8f8f2; --current: #44475a; --comment: #6272a4; --cyan: #8be9fd; --green: #50fa7b; --orange: #ffb86c; --pink: #ff79c6; --purple: #bd93f9; --red: #ff5555; --yellow: #f1fa8c; --crayola: #a9b7c6; }
+body .zenuml.theme-dark { background-color: var(--background); }
+.zenuml.theme-dark .header { color: var(--crayola); font-weight: 700; }
+.zenuml.theme-dark .sequence-diagram .lifeline-group:hover { background-color: rgb(34, 48, 73); }
+.zenuml.theme-dark .sequence-diagram .lifeline .participant { border-color: var(--border); border-radius: 2px; background: var(--background); }
+.zenuml.theme-dark .sequence-diagram .lifeline .participant label { color: var(--cyan); }
+.zenuml.theme-dark .sequence-diagram .lifeline .line { background: var(--border); }
+.zenuml.theme-dark .fragment > .header > .condition { color: var(--crayola); padding: 6px; }
+.zenuml.theme-dark .sequence-diagram .fragment .header label { color: var(--crayola); padding: 6px; }
+.zenuml.theme-dark .sequence-diagram .fragment .header .name { border-bottom-color: var(--border); }
+.zenuml.theme-dark .sequence-diagram .fragment .header .name label { color: var(--pink); font-weight: 400; }
+.zenuml.theme-dark .sequence-diagram .fragment { border-color: var(--border); }
+.zenuml.theme-dark .sequence-diagram .comments { border: none; background: transparent; color: var(--comment); }
+.zenuml.theme-dark .sequence-diagram .fragment .segment:not(:first-child) { border-top-color: var(--border); }
+.zenuml.theme-dark .sequence-diagram .interaction { color: var(--orange); }
+.zenuml.theme-dark .sequence-diagram .message { border-bottom-color: var(--border); }
+.zenuml.theme-dark .sequence-diagram .message .name:hover { color: var(--crayola); }
+.zenuml.theme-dark .sequence-diagram .message svg polyline { fill: var(--border); stroke: var(--border); }
+.zenuml.theme-dark .sequence-diagram .message.self svg > polyline:not(.head) { fill: none; }
+.zenuml.theme-dark .sequence-diagram .occurrence { background-color: var(--current); box-shadow: 0 0 0 1px var(--occurance-border); border-radius: 2px; }
+.zenuml.theme-dark .sequence-diagram .divider .left, .zenuml.theme-dark .sequence-diagram .divider .right { background: var(--border); }
+.zenuml.theme-dark .sequence-diagram .divider .name { color: var(--comment); }
+.zenuml.theme-dark .interaction .message > .name:hover { background-color: rgb(34, 139, 34); color: rgb(255, 255, 255); }
+p[data-v-15224042] { margin: 0px; line-height: 1.25em; }
+.occurrence[data-v-4e715276] { width: 15px; padding: 16px 0px 16px 5px; }
+[data-v-4e715276] > .statement-container:last-child > .interaction.return:last-of-type { margin-bottom: 0px; border-bottom: 0px; transform: translateY(1px); }
+[data-v-4e715276] > .statement-container:last-child > .interaction.return:last-of-type > .message { bottom: -17px; height: 0px; }
+.right-to-left.occurrence[data-v-4e715276] { left: -14px; }
+.occurrence { margin-top: -2px; }
+.interaction .occurrence.source[data-v-703306ae] { position: absolute; height: calc(100% + 14px); left: -12px; display: none; }
+.interaction .occurrence.source.right-to-left[data-v-703306ae] { left: unset; right: -13px; }
+.message.self[data-v-fbc5fa7e] { transform: translate(-5px); }
+.interaction .invisible-occurrence[data-v-40bff5d3] { height: 20px; }
+.interaction.async[data-v-40bff5d3] .message { width: 100%; }
+.collapsible-header[data-v-b41acdfc] { display: flex; width: 100%; justify-content: space-between; }
+.collapse-button[data-v-b41acdfc] { display: none; }
+.fragment:hover .collapsible-header .collapse-button.expanded[data-v-b41acdfc] { display: inline-block !important; }
+[data-v-0a896a9f], [data-v-0f640fba] { border-color: inherit; }
+.fragment.par > .block > .statement-container:not(:first-child) { border-top-color: inherit; border-top-width: 1px; border-top-style: solid; }
+[data-v-ce259a11], [data-v-a846d536], [data-v-7b7c43b8] { border-color: inherit; }
+.divider[data-v-9e567e69] { display: flex; align-items: center; }
+.name[data-v-9e567e69] { margin: 0px; padding: 2px 6px; }
+.left[data-v-9e567e69], .right[data-v-9e567e69] { height: 1px; flex-grow: 1; }
+
+
+:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
+.mac-os-11 { --title-bar-height:28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, h5 { white-space: pre-wrap; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+thead, tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+svg { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; border-color: transparent !important; padding-top: 0px !important; padding-bottom: 0px !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  #write > p:nth-child(1) { margin-top: 0px; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+  figure { overflow-x: visible; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.reversefootnote { font-family: ui-monospace, sans-serif; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex:2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; overflow-wrap: anywhere; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left: 28px solid transparent; border-right: 28px solid transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right: 8px solid transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+mjx-container { break-inside: avoid; }
+
+
+.CodeMirror { height: auto; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.CodeMirror-scroll { overflow: auto hidden; z-index: 3; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background: inherit; white-space: nowrap; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: red; }
+.cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { height: 100%; outline: 0px; position: relative; box-sizing: content-box; background: inherit; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; outline: 0px; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow: hidden; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow: auto hidden; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 10px; z-index: 3; overflow-y: hidden; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: none !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; overflow-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { overflow-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; inset: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+span.cm-underlined { text-decoration: underline; }
+span.cm-strikethrough { text-decoration: line-through; }
+.cm-tw-syntaxerror { color: rgb(255, 255, 255); background-color: rgb(153, 0, 0); }
+.cm-tw-deleted { text-decoration: line-through; }
+.cm-tw-header5 { font-weight: 700; }
+.cm-tw-listitem:first-child { padding-left: 10px; }
+.cm-tw-box { border-style: solid; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-color: inherit; border-top-width: 0px !important; }
+.cm-tw-underline { text-decoration: underline; }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, 'Segoe UI Emoji', sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+
+/*@media print {
+    .typora-export h1,
+    .typora-export h2 {
+        border-bottom: none;
+        padding-bottom: initial;
+    }
+
+    .typora-export h1::after,
+    .typora-export h2::after {
+        content: "";
+        display: block;
+        height: 100px;
+        margin-top: -96px;
+        border-top: 1px solid #eee;
+    }
+}*/
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+    margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    pre {
+        page-break-inside: avoid;
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+/*.html-for-mac {
+    --item-hover-bg-color: #E6F0FE;
+}*/
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+    opacity: 0.4;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+.menu-item-container a.menu-style-btn {
+    background-color: #f5f8fa;
+    background-image: linear-gradient( 180deg , hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0)); 
+}
+
+
+
+</style><title>README</title>
+</head>
+<body class='typora-export os-windows'><div class='typora-export-content'>
+<div id='write'  class=''><h1 id='mpc-vote-方案'><span>MPC-Vote 方案</span></h1><h2 id='概述'><span>概述</span></h2><p><span>本项目展示了一种基于多精度整数的秘密分享实现的安全多方计算（MPC），并将此方法应用在评审打分的具体场景下。</span></p><h3 id='使用指南'><span>使用指南</span></h3><blockquote><p><span>需要进入 evaluation 分支。</span></p></blockquote><p><span>开箱即用，启动 admin 模块 + 3 个 voter 模块，在 shell 中输入 help 查看可以使用的命令。由于只为展示算法使用，该项目没有实现候选人注册逻辑，候选人（参赛项目）信息、投票人（专家）信息等已经在 AdminController 中直接定义。</span></p><p><span>典型的投票流程：</span></p><ol start='' ><li><p><span>开启一个 admin 模块和 3 个 voter 模块；</span></p></li><li><p><span>voter 模块输入 lc 查看候选人信息，r 注册到 admin；</span></p></li><li><p><span>所有 voter 都注册后，打分开始，输入 s 可以查看状态；</span></p></li><li><p><span>输入 v，进入打分状态；</span></p></li><li><p><span>投票完毕后，需要等待其它专家完成打分操作；</span></p></li><li><p><span>打分结束，输入 res 查看打分结果；</span></p></li><li><p><span>admin 模块输入 reset 重置状态，进入下一次打分。</span></p></li></ol><blockquote><p><span>输入 help 可以查看更多命令信息。</span></p></blockquote><h3 id='时序'><span>时序</span></h3><p><span>以下是项目的主要功能的时序，包括候选人注册（未实现），投票人注册，投票，计票功能。</span></p><div class="md-diagram-panel md-fences-adv-panel" lang="mermaid"><svg id="mermaidChart0" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 646px; height: 1241.59px; margin: auto;" role="graphics-document document" aria-roledescription="zenuml"><style>#mermaidChart0{font-family:sans-serif;font-size:16px;fill:#333;}#mermaidChart0 .error-icon{fill:#552222;}#mermaidChart0 .error-text{fill:#552222;stroke:#552222;}#mermaidChart0 .edge-thickness-normal{stroke-width:2px;}#mermaidChart0 .edge-thickness-thick{stroke-width:3.5px;}#mermaidChart0 .edge-pattern-solid{stroke-dasharray:0;}#mermaidChart0 .edge-pattern-dashed{stroke-dasharray:3;}#mermaidChart0 .edge-pattern-dotted{stroke-dasharray:2;}#mermaidChart0 .marker{fill:#333333;stroke:#333333;}#mermaidChart0 .marker.cross{stroke:#333333;}#mermaidChart0 svg{font-family:sans-serif;font-size:16px;}#mermaidChart0 undefined :root{--mermaid-alt-font-family:sans-serif;}</style><g></g><foreignObject x="0" y="0" width="100%" height="100%"><div id="container-mermaidChart0" xmlns="http://www.w3.org/1999/xhtml" style="display: flex;"><div id="zenUMLApp-mermaidChart0" data-v-app=""><div class="zenuml p-1 bg-skin-canvas theme-mermaid" style="display: inline-block;"><div style="display: none;"><div class="flex flex-nowrap m-2 text-sm"><div class="ml-4 text-xs inline-flex items-center font-bold leading-sm px-3 py-1 bg-green-200 text-green-700 rounded-sm"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="15"></line><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 9a9 9 0 0 1-9 9"></path></svg><span class="inline-block px-2">process.env.VUE_APP_GIT_BRANCH:process.env.VUE_APP_GIT_HASH</span></div></div></div><div class="frame text-skin-frame bg-skin-frame border-skin-frame relative m-1 origin-top-left whitespace-nowrap border rounded"><div><div class="header text-skin-title bg-skin-title border-skin-frame border-b p-1 flex justify-between rounded-t"><div class="left hide-export"></div><div class="right flex-grow flex justify-between"><div class="title text-skin-title text-base font-semibold">投票时序概览</div><div class="hide-export flex items-center" data-v-70836592=""><div class="tooltip bottom whitespace-normal" data-tooltip="We (the vendor) do not have access to your data. The diagram is generated in this browser." data-v-70836592=""><svg class="fill-current h-6 w-6 m-auto" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 214.27 214.27" data-v-70836592=""><path d="M196.926 55.171c-.11-5.785-.215-11.25-.215-16.537a7.5 7.5 0 0 0-7.5-7.5c-32.075 0-56.496-9.218-76.852-29.01a7.498 7.498 0 0 0-10.457 0c-20.354 19.792-44.771 29.01-76.844 29.01a7.5 7.5 0 0 0-7.5 7.5c0 5.288-.104 10.755-.215 16.541-1.028 53.836-2.436 127.567 87.331 158.682a7.495 7.495 0 0 0 4.912 0c89.774-31.116 88.368-104.849 87.34-158.686zm-89.795 143.641c-76.987-27.967-75.823-89.232-74.79-143.351.062-3.248.122-6.396.164-9.482 30.04-1.268 54.062-10.371 74.626-28.285 20.566 17.914 44.592 27.018 74.634 28.285.042 3.085.102 6.231.164 9.477 1.032 54.121 2.195 115.388-74.798 143.356z" data-v-70836592=""></path><path d="m132.958 81.082-36.199 36.197-15.447-15.447a7.501 7.501 0 0 0-10.606 10.607l20.75 20.75a7.477 7.477 0 0 0 5.303 2.196 7.477 7.477 0 0 0 5.303-2.196l41.501-41.5a7.498 7.498 0 0 0 .001-10.606 7.5 7.5 0 0 0-10.606-.001z" data-v-70836592=""></path></svg></div></div></div></div><div><!----></div><div class="zenuml sequence-diagram relative box-border text-left overflow-visible origin-top-left" style="padding-left: 50px; transform: scale(1);"><div class="life-line-layer lifeline-layer absolute h-full flex flex-col pt-8 top-0" style="min-width: 200px; pointer-events: all;"><div class="container relative grow"><!----><!----><div id="C" class="lifeline absolute flex flex-col mx-2 transform -translate-x-1/2 h-full" data-v-6efc771f="" style="padding-top: 0px; left: 52px;"><div data-v-6efc771f="" style="display: none;">60</div><div class="line bg-skin-lifeline w0 mx-auto flex-grow w-px" data-v-6efc771f=""></div></div><!----><div id="A" class="lifeline absolute flex flex-col mx-2 transform -translate-x-1/2 h-full" data-v-6efc771f="" style="padding-top: 0px; left: 172px;"><div data-v-6efc771f="" style="display: none;">180</div><div class="line bg-skin-lifeline w0 mx-auto flex-grow w-px" data-v-6efc771f=""></div></div><!----><div id="V" class="lifeline absolute flex flex-col mx-2 transform -translate-x-1/2 h-full" data-v-6efc771f="" style="padding-top: 0px; left: 292px;"><div data-v-6efc771f="" style="display: none;">300</div><div class="line bg-skin-lifeline w0 mx-auto flex-grow w-px" data-v-6efc771f=""></div></div><!----><div id="V2" class="lifeline absolute flex flex-col mx-2 transform -translate-x-1/2 h-full" data-v-6efc771f="" style="padding-top: 0px; left: 413px;"><div data-v-6efc771f="" style="display: none;">421</div><div class="line bg-skin-lifeline w0 mx-auto flex-grow w-px" data-v-6efc771f=""></div></div></div></div><div class="message-layer pt-24 pb-10" style="width: 501px;"><div class="block" style="padding-left: 60px;"><div class="statement-container mt-1"><div class="interaction sync inline-block text-left text-sm text-skin-message" data-to="A" data-type="interaction" data-signature="register()" comment="" data-v-703306ae="" style="width: 120px; transform: translateX(0px);"><div class="occurrence source border-2" data-v-703306ae=""></div><div class="comments text-skin-comment min-w-[100px] flex justify-around text-left text-sm opacity-50 hover:opacity-100" data-v-15224042="" data-v-703306ae=""><div data-v-15224042=""></div></div><div class="message border-skin-message-arrow border-b-2 flex items-end text-center text-center" assignee="" data-v-703306ae="" style="border-bottom-style: solid;"><div class="name group flex-grow text-sm hover:whitespace-normal hover:text-skin-message-hover hover:bg-skin-message-hover"><div class="inline-block relative min-h-[1em]">register() <!----></div></div><div class="point text-skin-message-arrow fill flex-shrink-0 transform translate-y-1/2 -my-px" data-v-ca07199a=""><svg class="arrow stroke-2" height="10" width="10" data-v-ca07199a=""><polyline class="right head fill-current stroke-current" points="0,0 10,5 0,10" data-v-ca07199a=""></polyline></svg><!----></div></div><div class="occurrence border-skin-occurrence bg-skin-occurrence rounded-sm border-2 relative left-full" data-el-type="occurrence" data-belongs-to="A" data-x-offset="0" data-debug-center-of="180" data-v-4e715276="" data-v-703306ae=""><!----></div><!----></div></div><div class="statement-container mt-1"><div class="interaction sync inline-block text-left text-sm text-skin-message" data-to="A" data-type="interaction" data-signature="register()" comment="" data-v-703306ae="" style="width: 120px; transform: translateX(120px);"><div class="occurrence source border-2 right-to-left" data-v-703306ae=""></div><div class="comments text-skin-comment min-w-[100px] flex justify-around text-left text-sm opacity-50 hover:opacity-100" data-v-15224042="" data-v-703306ae=""><div data-v-15224042=""></div></div><div class="message border-skin-message-arrow border-b-2 flex items-end flex-row-reverse right-to-left text-center text-center" assignee="" data-v-703306ae="" style="border-bottom-style: solid;"><div class="name group flex-grow text-sm hover:whitespace-normal hover:text-skin-message-hover hover:bg-skin-message-hover"><div class="inline-block relative min-h-[1em]">register() <!----></div></div><div class="point text-skin-message-arrow fill right-to-left flex-shrink-0 transform translate-y-1/2 -my-px" data-v-ca07199a=""><!----><svg class="arrow stroke-2" height="10" width="10" data-v-ca07199a=""><polyline class="left head fill-current stroke-current" points="10,0 0,5 10,10" data-v-ca07199a=""></polyline></svg></div></div><div class="occurrence border-skin-occurrence bg-skin-occurrence rounded-sm border-2 relative left-full right-to-left" data-el-type="occurrence" data-belongs-to="A" data-x-offset="0" data-debug-center-of="180" data-v-4e715276="" data-v-703306ae=""><!----></div><!----></div></div><div class="statement-container mt-1"><div class="fragment par border-skin-fragment rounded text-left text-sm text-skin-message" commentobj="[object Object]" data-v-0f640fba="" style="transform: translateX(-71px); width: 501px;"><!----><div class="header bg-skin-fragment-header text-skin-fragment-header text-base leading-4 rounded-t relative" data-v-0f640fba=""><!----><div class="name font-semibold p-1 border-b" data-v-0f640fba=""><div class="collapsible-header" data-v-b41acdfc="" data-v-0f640fba=""><label class="p-0 mb-0" data-v-b41acdfc="">Par</label><svg width="16px" height="16px" class="expanded collapse-button cursor-pointer" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="miter" data-v-b41acdfc=""><g id="SVGRepo_bgCarrier" stroke-width="0" data-v-b41acdfc=""></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" data-v-b41acdfc=""></g><g id="SVGRepo_iconCarrier" data-v-b41acdfc=""><line x1="14" y1="10" x2="21" y2="3" data-v-b41acdfc=""></line><polyline points="20 10 14 10 14 4" data-v-b41acdfc=""></polyline><line x1="3" y1="21" x2="10" y2="14" data-v-b41acdfc=""></line><polyline points="4 14 10 14 10 20" data-v-b41acdfc=""></polyline></g></svg><svg width="16px" height="16px" viewBox="0 0 24 24" class="hidden cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="#000000" data-v-b41acdfc=""><g id="SVGRepo_bgCarrier" stroke-width="0" data-v-b41acdfc=""></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" data-v-b41acdfc=""></g><g id="SVGRepo_iconCarrier" data-v-b41acdfc=""><title data-v-b41acdfc=""></title> <g id="Complete" data-v-b41acdfc=""><g id="expand" data-v-b41acdfc=""><g data-v-b41acdfc=""><polyline data-name="Right" fill="none" id="Right-2" points="3 17.3 3 21 6.7 21" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" data-v-b41acdfc=""></polyline> <line fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" x1="10" x2="3.8" y1="14" y2="20.2" data-v-b41acdfc=""></line> <line fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" x1="14" x2="20.2" y1="10" y2="3.8" data-v-b41acdfc=""></line> <polyline data-name="Right" fill="none" id="Right-3" points="21 6.7 21 3 17.3 3" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" data-v-b41acdfc=""></polyline></g></g></g></g></svg></div></div></div><div class="block" data-v-0f640fba="" style="padding-left: 70px;"><div class="statement-container mt-1"><div class="interaction sync inline-block text-left text-sm text-skin-message" data-to="V" data-type="interaction" data-signature="vote()" comment="" data-v-703306ae="" style="width: 121px; transform: translateX(240px);"><div class="occurrence source border-2 right-to-left" data-v-703306ae=""></div><div class="comments text-skin-comment min-w-[100px] flex justify-around text-left text-sm opacity-50 hover:opacity-100" data-v-15224042="" data-v-703306ae=""><div data-v-15224042=""></div></div><div class="message border-skin-message-arrow border-b-2 flex items-end flex-row-reverse right-to-left text-center text-center" assignee="" data-v-703306ae="" style="border-bottom-style: solid;"><div class="name group flex-grow text-sm hover:whitespace-normal hover:text-skin-message-hover hover:bg-skin-message-hover"><div class="inline-block relative min-h-[1em]">vote() <!----></div></div><div class="point text-skin-message-arrow fill right-to-left flex-shrink-0 transform translate-y-1/2 -my-px" data-v-ca07199a=""><!----><svg class="arrow stroke-2" height="10" width="10" data-v-ca07199a=""><polyline class="left head fill-current stroke-current" points="10,0 0,5 10,10" data-v-ca07199a=""></polyline></svg></div></div><div class="occurrence border-skin-occurrence bg-skin-occurrence rounded-sm border-2 relative left-full right-to-left" data-el-type="occurrence" data-belongs-to="V" data-x-offset="0" data-debug-center-of="300" data-v-4e715276="" data-v-703306ae=""><div class="block" data-v-4e715276=""><div class="statement-container mt-1"><div class="interaction sync inline-block inited-from-occurrence text-left text-sm text-skin-message" data-to="V2" data-type="interaction" data-signature="secretShare()" comment="" data-v-703306ae="" style="width: 121px; transform: translateX(0px);"><!----><div class="comments text-skin-comment min-w-[100px] flex justify-around text-left text-sm opacity-50 hover:opacity-100" data-v-15224042="" data-v-703306ae=""><div data-v-15224042=""></div></div><div class="message border-skin-message-arrow border-b-2 flex items-end text-center text-center" assignee="" data-v-703306ae="" style="border-bottom-style: solid;"><div class="name group flex-grow text-sm hover:whitespace-normal hover:text-skin-message-hover hover:bg-skin-message-hover"><div class="inline-block relative min-h-[1em]">secretShare() <!----></div></div><div class="point text-skin-message-arrow fill flex-shrink-0 transform translate-y-1/2 -my-px" data-v-ca07199a=""><svg class="arrow stroke-2" height="10" width="10" data-v-ca07199a=""><polyline class="right head fill-current stroke-current" points="0,0 10,5 0,10" data-v-ca07199a=""></polyline></svg><!----></div></div><div class="occurrence border-skin-occurrence bg-skin-occurrence rounded-sm border-2 relative left-full" data-el-type="occurrence" data-belongs-to="V2" data-x-offset="0" data-debug-center-of="421" data-v-4e715276="" data-v-703306ae=""><!----></div><!----></div></div><div class="statement-container mt-1"><div class="fragment alt border-skin-fragment rounded text-left text-sm text-skin-message" data-v-0a896a9f="" style="transform: translateX(-201px); width: 280px;"><div class="segment" data-v-0a896a9f=""><!----><div class="header bg-skin-fragment-header text-skin-fragment-header text-base leading-4 rounded-t relative" data-v-0a896a9f=""><!----><div class="name font-semibold p-1 border-b" data-v-0a896a9f=""><label class="p-0" data-v-0a896a9f=""><div class="collapsible-header" data-v-b41acdfc="" data-v-0a896a9f=""><label class="p-0 mb-0" data-v-b41acdfc="">Alt</label><svg width="16px" height="16px" class="expanded collapse-button cursor-pointer" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="miter" data-v-b41acdfc=""><g id="SVGRepo_bgCarrier" stroke-width="0" data-v-b41acdfc=""></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" data-v-b41acdfc=""></g><g id="SVGRepo_iconCarrier" data-v-b41acdfc=""><line x1="14" y1="10" x2="21" y2="3" data-v-b41acdfc=""></line><polyline points="20 10 14 10 14 4" data-v-b41acdfc=""></polyline><line x1="3" y1="21" x2="10" y2="14" data-v-b41acdfc=""></line><polyline points="4 14 10 14 10 20" data-v-b41acdfc=""></polyline></g></svg><svg width="16px" height="16px" viewBox="0 0 24 24" class="hidden cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="#000000" data-v-b41acdfc=""><g id="SVGRepo_bgCarrier" stroke-width="0" data-v-b41acdfc=""></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" data-v-b41acdfc=""></g><g id="SVGRepo_iconCarrier" data-v-b41acdfc=""><title data-v-b41acdfc=""></title> <g id="Complete" data-v-b41acdfc=""><g id="expand" data-v-b41acdfc=""><g data-v-b41acdfc=""><polyline data-name="Right" fill="none" id="Right-2" points="3 17.3 3 21 6.7 21" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" data-v-b41acdfc=""></polyline> <line fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" x1="10" x2="3.8" y1="14" y2="20.2" data-v-b41acdfc=""></line> <line fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" x1="14" x2="20.2" y1="10" y2="3.8" data-v-b41acdfc=""></line> <polyline data-name="Right" fill="none" id="Right-3" points="21 6.7 21 3 17.3 3" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" data-v-b41acdfc=""></polyline></g></g></g></g></svg></div></label></div></div></div><div class="" data-v-0a896a9f=""><div class="segment" data-v-0a896a9f=""><div class="text-skin-fragment" data-v-0a896a9f=""><label class="condition p-1" data-v-0a896a9f="">[is_all_vote]</label></div><div class="block" data-v-0a896a9f="" style="padding-left: 200px;"><div class="statement-container mt-1"><div class="interaction sync inline-block inited-from-occurrence text-left text-sm text-skin-message" data-to="A" data-type="interaction" data-signature="voteOK()" comment="" data-v-703306ae="" style="width: 120px; transform: translateX(-120px);"><!----><div class="comments text-skin-comment min-w-[100px] flex justify-around text-left text-sm opacity-50 hover:opacity-100" data-v-15224042="" data-v-703306ae=""><div data-v-15224042=""></div></div><div class="message border-skin-message-arrow border-b-2 flex items-end flex-row-reverse right-to-left text-center text-center" assignee="" data-v-703306ae="" style="border-bottom-style: solid;"><div class="name group flex-grow text-sm hover:whitespace-normal hover:text-skin-message-hover hover:bg-skin-message-hover"><div class="inline-block relative min-h-[1em]">voteOK() <!----></div></div><div class="point text-skin-message-arrow fill right-to-left flex-shrink-0 transform translate-y-1/2 -my-px" data-v-ca07199a=""><!----><svg class="arrow stroke-2" height="10" width="10" data-v-ca07199a=""><polyline class="left head fill-current stroke-current" points="10,0 0,5 10,10" data-v-ca07199a=""></polyline></svg></div></div><div class="occurrence border-skin-occurrence bg-skin-occurrence rounded-sm border-2 relative left-full right-to-left" data-el-type="occurrence" data-belongs-to="A" data-x-offset="0" data-debug-center-of="180" data-v-4e715276="" data-v-703306ae=""><div class="block" data-v-4e715276=""><div class="statement-container mt-1"><div class="fragment alt border-skin-fragment rounded text-left text-sm text-skin-message" data-v-0a896a9f="" style="transform: translateX(-71px); width: 260px;"><div class="segment" data-v-0a896a9f=""><!----><div class="header bg-skin-fragment-header text-skin-fragment-header text-base leading-4 rounded-t relative" data-v-0a896a9f=""><!----><div class="name font-semibold p-1 border-b" data-v-0a896a9f=""><label class="p-0" data-v-0a896a9f=""><div class="collapsible-header" data-v-b41acdfc="" data-v-0a896a9f=""><label class="p-0 mb-0" data-v-b41acdfc="">Alt</label><svg width="16px" height="16px" class="expanded collapse-button cursor-pointer" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="miter" data-v-b41acdfc=""><g id="SVGRepo_bgCarrier" stroke-width="0" data-v-b41acdfc=""></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" data-v-b41acdfc=""></g><g id="SVGRepo_iconCarrier" data-v-b41acdfc=""><line x1="14" y1="10" x2="21" y2="3" data-v-b41acdfc=""></line><polyline points="20 10 14 10 14 4" data-v-b41acdfc=""></polyline><line x1="3" y1="21" x2="10" y2="14" data-v-b41acdfc=""></line><polyline points="4 14 10 14 10 20" data-v-b41acdfc=""></polyline></g></svg><svg width="16px" height="16px" viewBox="0 0 24 24" class="hidden cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="#000000" data-v-b41acdfc=""><g id="SVGRepo_bgCarrier" stroke-width="0" data-v-b41acdfc=""></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" data-v-b41acdfc=""></g><g id="SVGRepo_iconCarrier" data-v-b41acdfc=""><title data-v-b41acdfc=""></title> <g id="Complete" data-v-b41acdfc=""><g id="expand" data-v-b41acdfc=""><g data-v-b41acdfc=""><polyline data-name="Right" fill="none" id="Right-2" points="3 17.3 3 21 6.7 21" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" data-v-b41acdfc=""></polyline> <line fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" x1="10" x2="3.8" y1="14" y2="20.2" data-v-b41acdfc=""></line> <line fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" x1="14" x2="20.2" y1="10" y2="3.8" data-v-b41acdfc=""></line> <polyline data-name="Right" fill="none" id="Right-3" points="21 6.7 21 3 17.3 3" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" data-v-b41acdfc=""></polyline></g></g></g></g></svg></div></label></div></div></div><div class="" data-v-0a896a9f=""><div class="segment" data-v-0a896a9f=""><div class="text-skin-fragment" data-v-0a896a9f=""><label class="condition p-1" data-v-0a896a9f="">[is_all_vote_OK]</label></div><div class="block" data-v-0a896a9f="" style="padding-left: 70px;"><div class="statement-container mt-1"><div class="interaction sync inline-block inited-from-occurrence text-left text-sm text-skin-message" data-to="V" data-type="interaction" data-signature="tally()" comment="" data-v-703306ae="" style="width: 120px; transform: translateX(0px);"><!----><div class="comments text-skin-comment min-w-[100px] flex justify-around text-left text-sm opacity-50 hover:opacity-100" data-v-15224042="" data-v-703306ae=""><div data-v-15224042=""></div></div><div class="message border-skin-message-arrow border-b-2 flex items-end text-center text-center" assignee="" data-v-703306ae="" style="border-bottom-style: solid;"><div class="name group flex-grow text-sm hover:whitespace-normal hover:text-skin-message-hover hover:bg-skin-message-hover"><div class="inline-block relative min-h-[1em]">tally() <!----></div></div><div class="point text-skin-message-arrow fill flex-shrink-0 transform translate-y-1/2 -my-px" data-v-ca07199a=""><svg class="arrow stroke-2" height="10" width="10" data-v-ca07199a=""><polyline class="right head fill-current stroke-current" points="0,0 10,5 0,10" data-v-ca07199a=""></polyline></svg><!----></div></div><div class="occurrence border-skin-occurrence bg-skin-occurrence rounded-sm border-2 relative left-full" data-el-type="occurrence" data-belongs-to="V" data-x-offset="0" data-debug-center-of="300" data-v-4e715276="" data-v-703306ae=""><!----></div><!----></div></div><div class="statement-container mt-1"><div class="interaction sync inline-block self inited-from-occurrence text-left text-sm text-skin-message" data-to="A" data-type="interaction" data-signature="computeResult" comment="" data-v-703306ae="" style="transform: translateX(0px);"><!----><div class="comments text-skin-comment min-w-[100px] flex justify-around text-left text-sm opacity-50 hover:opacity-100" data-v-15224042="" data-v-703306ae=""><div data-v-15224042=""></div></div><div class="message self text-sm flex items-start flex-col text-center" type="sync" data-v-703306ae="" style="border-width: 0px;"><label class="name group px-px hover:text-skin-message-hover hover:bg-skin-message-hover relative min-h-[1em]"><!----><!----> computeResult</label><svg class="arrow text-skin-message-arrow" width="30" height="24"><polyline class="line stroke-current fill-none stroke-2" points="0,2 28,2 28,15 14,15"></polyline><polyline class="head stroke-current fill-current stroke-2" points="18,9 8,15 18,21"></polyline></svg></div><div class="occurrence border-skin-occurrence bg-skin-occurrence rounded-sm border-2 relative left-full" data-el-type="occurrence" data-belongs-to="A" data-x-offset="0" data-debug-center-of="180" data-v-4e715276="" data-v-703306ae=""><!----></div><!----></div></div><div class="statement-container mt-1"><div class="interaction sync inline-block inited-from-occurrence text-left text-sm text-skin-message" data-to="V" data-type="interaction" data-signature="voteFinish" comment="" data-v-703306ae="" style="width: 120px; transform: translateX(0px);"><!----><div class="comments text-skin-comment min-w-[100px] flex justify-around text-left text-sm opacity-50 hover:opacity-100" data-v-15224042="" data-v-703306ae=""><div data-v-15224042=""></div></div><div class="message border-skin-message-arrow border-b-2 flex items-end text-center text-center" assignee="" data-v-703306ae="" style="border-bottom-style: solid;"><div class="name group flex-grow text-sm hover:whitespace-normal hover:text-skin-message-hover hover:bg-skin-message-hover"><div class="inline-block relative min-h-[1em]">voteFinish <!----></div></div><div class="point text-skin-message-arrow fill flex-shrink-0 transform translate-y-1/2 -my-px" data-v-ca07199a=""><svg class="arrow stroke-2" height="10" width="10" data-v-ca07199a=""><polyline class="right head fill-current stroke-current" points="0,0 10,5 0,10" data-v-ca07199a=""></polyline></svg><!----></div></div><div class="occurrence border-skin-occurrence bg-skin-occurrence rounded-sm border-2 relative left-full" data-el-type="occurrence" data-belongs-to="V" data-x-offset="0" data-debug-center-of="300" data-v-4e715276="" data-v-703306ae=""><!----></div><!----></div></div></div></div><div class="segment mt-2 border-t border-solid" data-v-0a896a9f=""><div class="text-skin-fragment" data-v-0a896a9f=""><label class="p-1" data-v-0a896a9f="">[else]</label></div><div class="block" data-v-0a896a9f="" style="padding-left: 70px;"><div class="statement-container mt-1"><div class="interaction sync inline-block inited-from-occurrence text-left text-sm text-skin-message" data-to="V" data-type="interaction" data-signature="continue" comment="" data-v-703306ae="" style="width: 120px; transform: translateX(0px);"><!----><div class="comments text-skin-comment min-w-[100px] flex justify-around text-left text-sm opacity-50 hover:opacity-100" data-v-15224042="" data-v-703306ae=""><div data-v-15224042=""></div></div><div class="message border-skin-message-arrow border-b-2 flex items-end text-center text-center" assignee="" data-v-703306ae="" style="border-bottom-style: solid;"><div class="name group flex-grow text-sm hover:whitespace-normal hover:text-skin-message-hover hover:bg-skin-message-hover"><div class="inline-block relative min-h-[1em]">continue <!----></div></div><div class="point text-skin-message-arrow fill flex-shrink-0 transform translate-y-1/2 -my-px" data-v-ca07199a=""><svg class="arrow stroke-2" height="10" width="10" data-v-ca07199a=""><polyline class="right head fill-current stroke-current" points="0,0 10,5 0,10" data-v-ca07199a=""></polyline></svg><!----></div></div><div class="occurrence border-skin-occurrence bg-skin-occurrence rounded-sm border-2 relative left-full" data-el-type="occurrence" data-belongs-to="V" data-x-offset="0" data-debug-center-of="300" data-v-4e715276="" data-v-703306ae=""><!----></div><!----></div></div></div></div></div></div></div></div></div><!----></div></div></div></div><!----></div></div></div></div></div><!----></div></div><div class="statement-container mt-1"><div class="interaction sync inline-block text-left text-sm text-skin-message" data-to="V2" data-type="interaction" data-signature="vote()" comment="" data-v-703306ae="" style="width: 121px; transform: translateX(240px);"><div class="occurrence source border-2" data-v-703306ae=""></div><div class="comments text-skin-comment min-w-[100px] flex justify-around text-left text-sm opacity-50 hover:opacity-100" data-v-15224042="" data-v-703306ae=""><div data-v-15224042=""></div></div><div class="message border-skin-message-arrow border-b-2 flex items-end text-center text-center" assignee="" data-v-703306ae="" style="border-bottom-style: solid;"><div class="name group flex-grow text-sm hover:whitespace-normal hover:text-skin-message-hover hover:bg-skin-message-hover"><div class="inline-block relative min-h-[1em]">vote() <!----></div></div><div class="point text-skin-message-arrow fill flex-shrink-0 transform translate-y-1/2 -my-px" data-v-ca07199a=""><svg class="arrow stroke-2" height="10" width="10" data-v-ca07199a=""><polyline class="right head fill-current stroke-current" points="0,0 10,5 0,10" data-v-ca07199a=""></polyline></svg><!----></div></div><div class="occurrence border-skin-occurrence bg-skin-occurrence rounded-sm border-2 relative left-full" data-el-type="occurrence" data-belongs-to="V2" data-x-offset="0" data-debug-center-of="421" data-v-4e715276="" data-v-703306ae=""><!----></div><!----></div></div></div></div></div><div class="statement-container mt-1"><div class="fragment opt border-skin-fragment rounded text-left text-sm text-skin-message" commentobj="[object Object]" data-v-a846d536="" style="transform: translateX(-71px); width: 260px;"><!----><div class="header bg-skin-fragment-header text-skin-fragment-header text-base leading-4 relative" data-v-a846d536=""><!----><div class="name font-semibold p-1 border-b" data-v-a846d536=""><div class="collapsible-header" data-v-b41acdfc="" data-v-a846d536=""><label class="p-0 mb-0" data-v-b41acdfc="">Opt</label><svg width="16px" height="16px" class="expanded collapse-button cursor-pointer" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="miter" data-v-b41acdfc=""><g id="SVGRepo_bgCarrier" stroke-width="0" data-v-b41acdfc=""></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" data-v-b41acdfc=""></g><g id="SVGRepo_iconCarrier" data-v-b41acdfc=""><line x1="14" y1="10" x2="21" y2="3" data-v-b41acdfc=""></line><polyline points="20 10 14 10 14 4" data-v-b41acdfc=""></polyline><line x1="3" y1="21" x2="10" y2="14" data-v-b41acdfc=""></line><polyline points="4 14 10 14 10 20" data-v-b41acdfc=""></polyline></g></svg><svg width="16px" height="16px" viewBox="0 0 24 24" class="hidden cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="#000000" data-v-b41acdfc=""><g id="SVGRepo_bgCarrier" stroke-width="0" data-v-b41acdfc=""></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" data-v-b41acdfc=""></g><g id="SVGRepo_iconCarrier" data-v-b41acdfc=""><title data-v-b41acdfc=""></title> <g id="Complete" data-v-b41acdfc=""><g id="expand" data-v-b41acdfc=""><g data-v-b41acdfc=""><polyline data-name="Right" fill="none" id="Right-2" points="3 17.3 3 21 6.7 21" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" data-v-b41acdfc=""></polyline> <line fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" x1="10" x2="3.8" y1="14" y2="20.2" data-v-b41acdfc=""></line> <line fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" x1="14" x2="20.2" y1="10" y2="3.8" data-v-b41acdfc=""></line> <polyline data-name="Right" fill="none" id="Right-3" points="21 6.7 21 3 17.3 3" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" data-v-b41acdfc=""></polyline></g></g></g></g></svg></div></div></div><div class="block" data-v-a846d536="" style="padding-left: 70px;"><div class="statement-container mt-1"><div class="interaction sync inline-block text-left text-sm text-skin-message" data-to="A" data-type="interaction" data-signature="getResult()" comment="" data-v-703306ae="" style="width: 120px; transform: translateX(0px);"><!----><div class="comments text-skin-comment min-w-[100px] flex justify-around text-left text-sm opacity-50 hover:opacity-100" data-v-15224042="" data-v-703306ae=""><div data-v-15224042=""></div></div><div class="message border-skin-message-arrow border-b-2 flex items-end text-center text-center" assignee="" data-v-703306ae="" style="border-bottom-style: solid;"><div class="name group flex-grow text-sm hover:whitespace-normal hover:text-skin-message-hover hover:bg-skin-message-hover"><div class="inline-block relative min-h-[1em]">getResult() <!----></div></div><div class="point text-skin-message-arrow fill flex-shrink-0 transform translate-y-1/2 -my-px" data-v-ca07199a=""><svg class="arrow stroke-2" height="10" width="10" data-v-ca07199a=""><polyline class="right head fill-current stroke-current" points="0,0 10,5 0,10" data-v-ca07199a=""></polyline></svg><!----></div></div><div class="occurrence border-skin-occurrence bg-skin-occurrence rounded-sm border-2 relative left-full" data-el-type="occurrence" data-belongs-to="A" data-x-offset="0" data-debug-center-of="180" data-v-4e715276="" data-v-703306ae=""><!----></div><!----></div></div></div></div></div><div class="statement-container mt-1"><div class="fragment opt border-skin-fragment rounded text-left text-sm text-skin-message" commentobj="[object Object]" data-v-a846d536="" style="transform: translateX(-71px); width: 380px;"><!----><div class="header bg-skin-fragment-header text-skin-fragment-header text-base leading-4 relative" data-v-a846d536=""><!----><div class="name font-semibold p-1 border-b" data-v-a846d536=""><div class="collapsible-header" data-v-b41acdfc="" data-v-a846d536=""><label class="p-0 mb-0" data-v-b41acdfc="">Opt</label><svg width="16px" height="16px" class="expanded collapse-button cursor-pointer" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="miter" data-v-b41acdfc=""><g id="SVGRepo_bgCarrier" stroke-width="0" data-v-b41acdfc=""></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" data-v-b41acdfc=""></g><g id="SVGRepo_iconCarrier" data-v-b41acdfc=""><line x1="14" y1="10" x2="21" y2="3" data-v-b41acdfc=""></line><polyline points="20 10 14 10 14 4" data-v-b41acdfc=""></polyline><line x1="3" y1="21" x2="10" y2="14" data-v-b41acdfc=""></line><polyline points="4 14 10 14 10 20" data-v-b41acdfc=""></polyline></g></svg><svg width="16px" height="16px" viewBox="0 0 24 24" class="hidden cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="#000000" data-v-b41acdfc=""><g id="SVGRepo_bgCarrier" stroke-width="0" data-v-b41acdfc=""></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" data-v-b41acdfc=""></g><g id="SVGRepo_iconCarrier" data-v-b41acdfc=""><title data-v-b41acdfc=""></title> <g id="Complete" data-v-b41acdfc=""><g id="expand" data-v-b41acdfc=""><g data-v-b41acdfc=""><polyline data-name="Right" fill="none" id="Right-2" points="3 17.3 3 21 6.7 21" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" data-v-b41acdfc=""></polyline> <line fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" x1="10" x2="3.8" y1="14" y2="20.2" data-v-b41acdfc=""></line> <line fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" x1="14" x2="20.2" y1="10" y2="3.8" data-v-b41acdfc=""></line> <polyline data-name="Right" fill="none" id="Right-3" points="21 6.7 21 3 17.3 3" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" data-v-b41acdfc=""></polyline></g></g></g></g></svg></div></div></div><div class="block" data-v-a846d536="" style="padding-left: 70px;"><div class="statement-container mt-1"><div class="interaction sync inline-block text-left text-sm text-skin-message" data-to="A" data-type="interaction" data-signature="getResult()" comment="" data-v-703306ae="" style="width: 120px; transform: translateX(120px);"><div class="occurrence source border-2 right-to-left" data-v-703306ae=""></div><div class="comments text-skin-comment min-w-[100px] flex justify-around text-left text-sm opacity-50 hover:opacity-100" data-v-15224042="" data-v-703306ae=""><div data-v-15224042=""></div></div><div class="message border-skin-message-arrow border-b-2 flex items-end flex-row-reverse right-to-left text-center text-center" assignee="" data-v-703306ae="" style="border-bottom-style: solid;"><div class="name group flex-grow text-sm hover:whitespace-normal hover:text-skin-message-hover hover:bg-skin-message-hover"><div class="inline-block relative min-h-[1em]">getResult() <!----></div></div><div class="point text-skin-message-arrow fill right-to-left flex-shrink-0 transform translate-y-1/2 -my-px" data-v-ca07199a=""><!----><svg class="arrow stroke-2" height="10" width="10" data-v-ca07199a=""><polyline class="left head fill-current stroke-current" points="10,0 0,5 10,10" data-v-ca07199a=""></polyline></svg></div></div><div class="occurrence border-skin-occurrence bg-skin-occurrence rounded-sm border-2 relative left-full right-to-left" data-el-type="occurrence" data-belongs-to="A" data-x-offset="0" data-debug-center-of="180" data-v-4e715276="" data-v-703306ae=""><!----></div><!----></div></div></div></div></div></div></div><div class="life-line-layer lifeline-layer absolute h-full flex flex-col pt-8 top-0" style="min-width: 200px; pointer-events: none;"><div class="container relative grow"><!----><!----><div id="C" class="lifeline absolute flex flex-col mx-2 transform -translate-x-1/2 h-full" data-v-6efc771f="" style="padding-top: 0px; left: 52px;"><div data-v-6efc771f="" style="display: none;">60</div><div class="participant bg-skin-participant border-skin-participant text-skin-participant rounded text-base leading-4 flex flex-col justify-center z-10 h-10 sticky top-8" data-v-6efc771f=""><div class="absolute left-1/2 transform -translate-x-1/2 -translate-y-full h-8 [&amp;>svg]:w-full [&amp;>svg]:h-full" alt="icon for C"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#clip0_544_54)">
+    <path d="M15.5489 4.19771C15.5489 5.18773 15.1485 6.13721 14.4358 6.83726C13.7231 7.53731 12.7565 7.93058 11.7486 7.93058C10.7407 7.93058 9.77403 7.53731 9.06133 6.83726C8.34863 6.13721 7.94824 5.18773 7.94824 4.19771C7.94824 3.20768 8.34863 2.25822 9.06133 1.55818C9.77403 0.858126 10.7407 0.464844 11.7486 0.464844C12.7565 0.464844 13.7231 0.858126 14.4358 1.55818C15.1485 2.25822 15.5489 3.20768 15.5489 4.19771Z" stroke="black"></path>
+    <path d="M6.54883 11.2152L17.2025 11.2073M11.7471 8.06641V19.5806V8.06641ZM11.7471 19.4385L6.79789 23.5738L11.7471 19.4385ZM11.7551 19.4385L17.1864 23.3055L11.7551 19.4385Z" stroke="black"></path>
+  </g>
+  <defs>
+    <clipPath id="clip0_544_54">
+      <rect width="24" height="24" fill="white"></rect>
+    </clipPath>
+  </defs>
+</svg>
+</div><div class="h-5 group flex flex-col justify-center"><!----><!----><label class="name leading-4">Candidate</label></div></div></div><!----><div id="A" class="lifeline absolute flex flex-col mx-2 transform -translate-x-1/2 h-full" data-v-6efc771f="" style="padding-top: 0px; left: 172px;"><div data-v-6efc771f="" style="display: none;">180</div><div class="participant bg-skin-participant border-skin-participant text-skin-participant rounded text-base leading-4 flex flex-col justify-center z-10 h-10 sticky top-8" data-v-6efc771f=""><div class="absolute left-1/2 transform -translate-x-1/2 -translate-y-full h-8 [&amp;>svg]:w-full [&amp;>svg]:h-full" alt="icon for A"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M12.258 0.001L12.514 0.005L12.769 0.01L13.022 0.018L13.273 0.028L13.522 0.04L13.769 0.055L14.015 0.071L14.257 0.09L14.498 0.11L14.737 0.133L14.973 0.157L15.206 0.184L15.437 0.212L15.666 0.243L15.891 0.275L16.114 0.309L16.334 0.345L16.551 0.383L16.765 0.423L16.976 0.464L17.184 0.507L17.389 0.552L17.59 0.598L17.788 0.646L17.982 0.696L18.173 0.747L18.36 0.8L18.543 0.854L18.723 0.91L18.898 0.967L19.07 1.026L19.238 1.086L19.401 1.147L19.561 1.21L19.716 1.274L19.866 1.34L19.94 1.373L20.013 1.406L20.084 1.44L20.154 1.474L20.223 1.509L20.291 1.544L20.358 1.579L20.424 1.614L20.488 1.65L20.552 1.686L20.614 1.722L20.674 1.758L20.734 1.795L20.792 1.832L20.85 1.869L20.905 1.907L20.96 1.945L21.013 1.983L21.065 2.021L21.116 2.06L21.166 2.099L21.214 2.138L21.261 2.177L21.306 2.217L21.35 2.257L21.393 2.297L21.434 2.337L21.474 2.378L21.513 2.419L21.55 2.46L21.586 2.501L21.62 2.542L21.653 2.584L21.685 2.626L21.715 2.668L21.744 2.71L21.771 2.752L21.797 2.795L21.821 2.838L21.844 2.881L21.865 2.924L21.885 2.967L21.903 3.011L21.92 3.054L21.935 3.098L21.948 3.142L21.96 3.186L21.971 3.231L21.98 3.275L21.987 3.32L21.993 3.365L21.997 3.41L21.999 3.455L22 3.5V20.5L21.999 20.545L21.997 20.59L21.993 20.635L21.987 20.68L21.98 20.725L21.971 20.769L21.96 20.814L21.948 20.858L21.935 20.902L21.92 20.946L21.903 20.989L21.885 21.033L21.865 21.076L21.844 21.119L21.821 21.162L21.797 21.205L21.771 21.248L21.744 21.29L21.715 21.332L21.685 21.374L21.653 21.416L21.62 21.458L21.586 21.499L21.55 21.54L21.513 21.581L21.474 21.622L21.434 21.663L21.393 21.703L21.35 21.743L21.306 21.783L21.261 21.823L21.214 21.862L21.166 21.901L21.116 21.94L21.065 21.979L21.013 22.017L20.96 22.055L20.905 22.093L20.85 22.131L20.792 22.168L20.734 22.205L20.674 22.242L20.614 22.278L20.552 22.314L20.488 22.35L20.424 22.386L20.358 22.421L20.291 22.456L20.223 22.491L20.154 22.526L20.084 22.56L20.013 22.594L19.94 22.627L19.866 22.66L19.716 22.726L19.561 22.79L19.401 22.853L19.238 22.914L19.07 22.974L18.898 23.033L18.723 23.09L18.543 23.146L18.36 23.2L18.173 23.253L17.982 23.304L17.788 23.354L17.59 23.402L17.389 23.448L17.184 23.493L16.976 23.536L16.765 23.577L16.551 23.617L16.334 23.655L16.114 23.691L15.891 23.725L15.666 23.757L15.437 23.788L15.206 23.816L14.973 23.843L14.737 23.867L14.498 23.89L14.257 23.91L14.015 23.929L13.769 23.945L13.522 23.96L13.273 23.972L13.022 23.982L12.769 23.99L12.514 23.995L12.258 23.999L12 24L11.742 23.999L11.486 23.995L11.231 23.99L10.978 23.982L10.727 23.972L10.478 23.96L10.231 23.945L9.986 23.929L9.743 23.91L9.502 23.89L9.264 23.867L9.028 23.843L8.794 23.816L8.563 23.788L8.335 23.757L8.109 23.725L7.886 23.691L7.666 23.655L7.449 23.617L7.235 23.577L7.024 23.536L6.816 23.493L6.612 23.448L6.411 23.402L6.213 23.354L6.018 23.304L5.828 23.253L5.641 23.2L5.457 23.146L5.278 23.09L5.102 23.033L4.93 22.974L4.763 22.914L4.599 22.853L4.44 22.79L4.285 22.726L4.134 22.66L4.06 22.627L3.988 22.594L3.916 22.56L3.846 22.526L3.777 22.491L3.709 22.456L3.642 22.421L3.576 22.386L3.512 22.35L3.449 22.314L3.387 22.278L3.326 22.242L3.266 22.205L3.208 22.168L3.151 22.131L3.095 22.093L3.04 22.055L2.987 22.017L2.935 21.979L2.884 21.94L2.835 21.901L2.786 21.862L2.74 21.823L2.694 21.783L2.65 21.743L2.607 21.703L2.566 21.663L2.526 21.622L2.487 21.581L2.45 21.54L2.414 21.499L2.38 21.458L2.347 21.416L2.315 21.374L2.285 21.332L2.256 21.29L2.229 21.248L2.203 21.205L2.179 21.162L2.156 21.119L2.135 21.076L2.115 21.033L2.097 20.989L2.08 20.946L2.065 20.902L2.052 20.858L2.04 20.814L2.029 20.769L2.02 20.725L2.013 20.68L2.007 20.635L2.003 20.59L2.001 20.545L2 20.5V3.5L2.001 3.455L2.003 3.41L2.007 3.365L2.013 3.32L2.02 3.275L2.029 3.231L2.04 3.186L2.052 3.142L2.065 3.098L2.08 3.054L2.097 3.011L2.115 2.967L2.135 2.924L2.156 2.881L2.179 2.838L2.203 2.795L2.229 2.752L2.256 2.71L2.285 2.668L2.315 2.626L2.347 2.584L2.38 2.542L2.414 2.501L2.45 2.46L2.487 2.419L2.526 2.378L2.566 2.337L2.607 2.297L2.65 2.257L2.694 2.217L2.74 2.177L2.786 2.138L2.835 2.099L2.884 2.06L2.935 2.021L2.987 1.983L3.04 1.945L3.095 1.907L3.151 1.869L3.208 1.832L3.266 1.795L3.326 1.758L3.387 1.722L3.449 1.686L3.512 1.65L3.576 1.614L3.642 1.579L3.709 1.544L3.777 1.509L3.846 1.474L3.916 1.44L3.988 1.406L4.06 1.373L4.134 1.34L4.285 1.274L4.44 1.21L4.599 1.147L4.763 1.086L4.93 1.026L5.102 0.967L5.278 0.91L5.457 0.854L5.641 0.8L5.828 0.747L6.018 0.696L6.213 0.646L6.411 0.598L6.612 0.552L6.816 0.507L7.024 0.464L7.235 0.423L7.449 0.383L7.666 0.345L7.886 0.309L8.109 0.275L8.335 0.243L8.563 0.212L8.794 0.184L9.028 0.157L9.264 0.133L9.502 0.11L9.743 0.09L9.986 0.071L10.231 0.055L10.478 0.04L10.727 0.028L10.978 0.018L11.231 0.01L11.486 0.005L11.742 0.001L12 0L12.258 0.001V0.001ZM3 20.5V20.51L3.001 20.531L3.004 20.552L3.008 20.574L3.013 20.595L3.019 20.617L3.026 20.639L3.035 20.662L3.045 20.684L3.056 20.707L3.068 20.73L3.081 20.753L3.096 20.776L3.112 20.8L3.129 20.823L3.147 20.847L3.166 20.871L3.187 20.895L3.209 20.92L3.232 20.944L3.256 20.969L3.308 21.018L3.364 21.068L3.425 21.119L3.491 21.17L3.561 21.221L3.636 21.272L3.715 21.324L3.799 21.376L3.887 21.428L3.979 21.48L4.076 21.532L4.178 21.583L4.283 21.635L4.393 21.687L4.507 21.738L4.626 21.789L4.749 21.84L4.876 21.89L5.007 21.94L5.142 21.99L5.281 22.038L5.425 22.087L5.572 22.134L5.724 22.181L5.879 22.228L6.039 22.273L6.202 22.318L6.369 22.361L6.54 22.404L6.716 22.445L6.894 22.486L7.077 22.525L7.264 22.564L7.454 22.601L7.648 22.636L7.845 22.671L8.047 22.704L8.251 22.735L8.46 22.765L8.672 22.794L8.888 22.821L9.107 22.846L9.329 22.87L9.555 22.891L9.785 22.911L10.018 22.929L10.254 22.945L10.494 22.96L10.737 22.972L10.983 22.982L11.232 22.99L11.485 22.995L11.741 22.999L12 23L12.26 22.999L12.517 22.995L12.771 22.99L13.021 22.982L13.268 22.971L13.512 22.959L13.753 22.945L13.99 22.929L14.223 22.911L14.454 22.89L14.68 22.869L14.904 22.845L15.124 22.819L15.34 22.792L15.552 22.764L15.762 22.733L15.967 22.702L16.169 22.668L16.367 22.634L16.561 22.598L16.752 22.561L16.939 22.522L17.122 22.482L17.301 22.442L17.476 22.4L17.648 22.357L17.816 22.313L17.979 22.268L18.139 22.222L18.294 22.176L18.446 22.129L18.594 22.081L18.737 22.032L18.876 21.983L19.012 21.933L19.143 21.883L19.269 21.833L19.392 21.782L19.51 21.73L19.624 21.679L19.734 21.627L19.84 21.575L19.941 21.523L20.037 21.471L20.129 21.419L20.217 21.366L20.3 21.315L20.379 21.263L20.453 21.211L20.523 21.16L20.588 21.109L20.648 21.058L20.704 21.008L20.755 20.958L20.778 20.934L20.801 20.909L20.822 20.885L20.842 20.861L20.861 20.837L20.879 20.813L20.896 20.789L20.911 20.766L20.925 20.742L20.938 20.719L20.95 20.696L20.96 20.673L20.97 20.651L20.978 20.629L20.984 20.607L20.99 20.585L20.994 20.563L20.998 20.542L20.999 20.521L21 20.5V16.373L20.923 16.428L20.843 16.481L20.76 16.535L20.675 16.588L20.588 16.64L20.498 16.692L20.405 16.743L20.31 16.793L20.213 16.843L20.113 16.892L20.011 16.941L19.906 16.989L19.8 17.036L19.691 17.083L19.58 17.129L19.466 17.174L19.351 17.219L19.233 17.263L19.113 17.306L18.991 17.348L18.867 17.39L18.741 17.431L18.613 17.471L18.483 17.511L18.351 17.549L18.217 17.587L18.082 17.624L17.944 17.661L17.805 17.696L17.663 17.731L17.52 17.765L17.376 17.798L17.229 17.83L17.081 17.861L16.931 17.891L16.78 17.921L16.627 17.95L16.473 17.977L16.317 18.004L16.159 18.03L16 18.055L15.839 18.079L15.677 18.102L15.514 18.124L15.349 18.145L15.183 18.165L15.016 18.184L14.847 18.202L14.678 18.219L14.507 18.235L14.334 18.25L14.161 18.264L13.986 18.277L13.811 18.289L13.634 18.3L13.456 18.31L13.277 18.318L13.098 18.326L12.917 18.332L12.735 18.337L12.553 18.341L12.369 18.344L12.185 18.346H11.815L11.631 18.344L11.447 18.341L11.265 18.337L11.083 18.332L10.902 18.326L10.723 18.318L10.544 18.31L10.366 18.3L10.19 18.289L10.014 18.277L9.839 18.264L9.666 18.25L9.494 18.235L9.323 18.219L9.153 18.202L8.984 18.184L8.817 18.165L8.651 18.145L8.486 18.124L8.323 18.102L8.161 18.079L8 18.055L7.841 18.03L7.684 18.004L7.528 17.977L7.373 17.95L7.22 17.921L7.069 17.891L6.919 17.861L6.771 17.83L6.625 17.798L6.48 17.765L6.337 17.731L6.196 17.696L6.056 17.661L5.919 17.624L5.783 17.587L5.649 17.549L5.517 17.511L5.387 17.471L5.259 17.431L5.133 17.39L5.009 17.348L4.887 17.306L4.767 17.262L4.65 17.219L4.534 17.174L4.421 17.129L4.309 17.083L4.2 17.036L4.094 16.989L3.989 16.941L3.887 16.892L3.787 16.843L3.69 16.793L3.595 16.743L3.502 16.691L3.412 16.64L3.325 16.588L3.24 16.535L3.157 16.481L3.077 16.427L3 16.373V20.5V20.5ZM3 14.846V14.857L3.001 14.878L3.004 14.899L3.008 14.92L3.013 14.942L3.019 14.964L3.026 14.986L3.035 15.008L3.045 15.03L3.056 15.053L3.068 15.076L3.081 15.099L3.096 15.123L3.112 15.146L3.129 15.17L3.147 15.194L3.166 15.218L3.187 15.242L3.209 15.266L3.232 15.291L3.256 15.315L3.308 15.365L3.364 15.415L3.425 15.465L3.491 15.516L3.561 15.567L3.636 15.619L3.715 15.67L3.799 15.722L3.887 15.774L3.979 15.826L4.076 15.878L4.178 15.93L4.283 15.982L4.393 16.033L4.507 16.084L4.626 16.136L4.749 16.186L4.876 16.237L5.007 16.287L5.142 16.336L5.281 16.385L5.425 16.433L5.572 16.481L5.724 16.528L5.879 16.574L6.039 16.619L6.202 16.664L6.369 16.708L6.54 16.75L6.716 16.792L6.894 16.832L7.077 16.872L7.264 16.91L7.454 16.947L7.648 16.983L7.845 17.017L8.047 17.05L8.251 17.082L8.46 17.112L8.672 17.14L8.888 17.167L9.107 17.192L9.329 17.216L9.555 17.238L9.785 17.258L10.018 17.276L10.254 17.292L10.494 17.306L10.737 17.318L10.983 17.328L11.232 17.336L11.485 17.342L11.741 17.345L12 17.346L12.26 17.345L12.517 17.342L12.771 17.336L13.021 17.328L13.268 17.318L13.512 17.306L13.753 17.291L13.99 17.275L14.223 17.257L14.454 17.237L14.68 17.215L14.904 17.191L15.124 17.166L15.34 17.139L15.552 17.11L15.762 17.08L15.967 17.048L16.169 17.015L16.367 16.98L16.561 16.944L16.752 16.907L16.939 16.868L17.122 16.829L17.301 16.788L17.476 16.746L17.648 16.703L17.816 16.659L17.979 16.614L18.139 16.569L18.294 16.522L18.446 16.475L18.594 16.427L18.737 16.379L18.876 16.329L19.012 16.28L19.143 16.23L19.269 16.179L19.392 16.128L19.51 16.077L19.624 16.025L19.734 15.973L19.84 15.921L19.941 15.869L20.037 15.817L20.129 15.765L20.217 15.713L20.3 15.661L20.379 15.609L20.453 15.558L20.523 15.506L20.588 15.455L20.648 15.405L20.704 15.354L20.755 15.305L20.778 15.28L20.801 15.256L20.822 15.231L20.842 15.207L20.861 15.183L20.879 15.159L20.896 15.135L20.911 15.112L20.925 15.089L20.938 15.065L20.95 15.043L20.96 15.02L20.97 14.997L20.978 14.975L20.984 14.953L20.99 14.931L20.994 14.91L20.998 14.888L20.999 14.867L21 14.846V10.707L20.923 10.761L20.843 10.815L20.76 10.869L20.675 10.921L20.588 10.974L20.498 11.025L20.405 11.076L20.31 11.127L20.213 11.177L20.113 11.226L20.011 11.275L19.906 11.323L19.8 11.37L19.691 11.417L19.58 11.463L19.466 11.508L19.351 11.552L19.233 11.596L19.113 11.64L18.991 11.682L18.867 11.724L18.741 11.765L18.613 11.805L18.483 11.844L18.351 11.883L18.217 11.921L18.082 11.958L17.944 11.994L17.805 12.03L17.663 12.065L17.52 12.098L17.376 12.131L17.229 12.164L17.081 12.195L16.931 12.225L16.78 12.255L16.627 12.283L16.473 12.311L16.317 12.338L16.159 12.364L16 12.389L15.839 12.413L15.677 12.436L15.514 12.458L15.349 12.479L15.183 12.499L15.016 12.518L14.847 12.536L14.678 12.553L14.507 12.569L14.334 12.584L14.161 12.598L13.986 12.611L13.811 12.623L13.634 12.634L13.456 12.643L13.277 12.652L13.098 12.659L12.917 12.666L12.735 12.671L12.553 12.675L12.369 12.678L12.185 12.68H11.815L11.631 12.678L11.447 12.675L11.265 12.671L11.083 12.666L10.902 12.659L10.723 12.652L10.544 12.643L10.366 12.634L10.19 12.623L10.014 12.611L9.839 12.598L9.666 12.584L9.494 12.569L9.323 12.553L9.153 12.536L8.984 12.518L8.817 12.499L8.651 12.479L8.486 12.458L8.323 12.436L8.161 12.413L8 12.389L7.841 12.364L7.684 12.338L7.528 12.311L7.373 12.283L7.22 12.255L7.069 12.225L6.919 12.195L6.771 12.164L6.625 12.131L6.48 12.098L6.337 12.065L6.196 12.03L6.056 11.994L5.919 11.958L5.783 11.921L5.649 11.883L5.517 11.844L5.387 11.805L5.259 11.765L5.133 11.724L5.009 11.682L4.887 11.639L4.767 11.596L4.65 11.552L4.534 11.508L4.421 11.462L4.309 11.416L4.2 11.37L4.094 11.323L3.989 11.275L3.887 11.226L3.787 11.177L3.69 11.127L3.595 11.076L3.502 11.025L3.412 10.974L3.325 10.921L3.24 10.869L3.157 10.815L3.077 10.761L3 10.707V14.846V14.846ZM3 9.18V9.191L3.001 9.211L3.004 9.233L3.008 9.254L3.013 9.276L3.019 9.297L3.026 9.319L3.035 9.342L3.045 9.364L3.056 9.387L3.068 9.41L3.081 9.433L3.096 9.456L3.112 9.48L3.129 9.504L3.147 9.527L3.166 9.551L3.187 9.576L3.209 9.6L3.232 9.624L3.256 9.649L3.308 9.699L3.364 9.749L3.425 9.799L3.491 9.85L3.561 9.901L3.636 9.953L3.715 10.004L3.799 10.056L3.887 10.108L3.979 10.16L4.076 10.212L4.178 10.264L4.283 10.315L4.393 10.367L4.507 10.418L4.626 10.469L4.749 10.52L4.876 10.57L5.007 10.62L5.142 10.67L5.281 10.719L5.425 10.767L5.572 10.815L5.724 10.862L5.879 10.908L6.039 10.953L6.202 10.998L6.369 11.041L6.54 11.084L6.716 11.126L6.894 11.166L7.077 11.206L7.264 11.244L7.454 11.281L7.648 11.317L7.845 11.351L8.047 11.384L8.251 11.416L8.46 11.446L8.672 11.474L8.888 11.501L9.107 11.526L9.329 11.55L9.555 11.571L9.785 11.591L10.018 11.609L10.254 11.626L10.494 11.64L10.737 11.652L10.983 11.662L11.232 11.67L11.485 11.676L11.741 11.679L12 11.68L12.26 11.679L12.517 11.676L12.771 11.67L13.021 11.662L13.268 11.652L13.512 11.639L13.753 11.625L13.99 11.609L14.223 11.591L14.454 11.571L14.68 11.549L14.904 11.525L15.124 11.5L15.34 11.473L15.552 11.444L15.762 11.414L15.967 11.382L16.169 11.349L16.367 11.314L16.561 11.278L16.752 11.241L16.939 11.202L17.122 11.163L17.301 11.122L17.476 11.08L17.648 11.037L17.816 10.993L17.979 10.948L18.139 10.903L18.294 10.856L18.446 10.809L18.594 10.761L18.737 10.712L18.876 10.663L19.012 10.614L19.143 10.563L19.269 10.513L19.392 10.462L19.51 10.41L19.624 10.359L19.734 10.307L19.84 10.255L19.941 10.203L20.037 10.151L20.129 10.099L20.217 10.047L20.3 9.995L20.379 9.943L20.453 9.891L20.523 9.84L20.588 9.789L20.648 9.738L20.704 9.688L20.755 9.639L20.778 9.614L20.801 9.589L20.822 9.565L20.842 9.541L20.861 9.517L20.879 9.493L20.896 9.469L20.911 9.446L20.925 9.422L20.938 9.399L20.95 9.376L20.96 9.354L20.97 9.331L20.978 9.309L20.984 9.287L20.99 9.265L20.994 9.243L20.998 9.222L20.999 9.201L21 9.18V5.027L20.923 5.081L20.843 5.135L20.76 5.188L20.675 5.241L20.588 5.294L20.498 5.345L20.405 5.396L20.31 5.447L20.213 5.497L20.113 5.546L20.011 5.594L19.906 5.642L19.8 5.69L19.691 5.736L19.58 5.782L19.466 5.828L19.351 5.872L19.233 5.916L19.113 5.959L18.991 6.002L18.867 6.044L18.741 6.085L18.613 6.125L18.483 6.164L18.351 6.203L18.217 6.241L18.082 6.278L17.944 6.314L17.805 6.35L17.663 6.384L17.52 6.418L17.376 6.451L17.229 6.483L17.081 6.515L16.931 6.545L16.78 6.575L16.627 6.603L16.473 6.631L16.317 6.658L16.159 6.684L16 6.708L15.839 6.732L15.677 6.755L15.514 6.778L15.349 6.799L15.183 6.819L15.016 6.838L14.847 6.856L14.678 6.873L14.507 6.889L14.334 6.904L14.161 6.918L13.986 6.931L13.811 6.943L13.634 6.953L13.456 6.963L13.277 6.972L13.098 6.979L12.917 6.985L12.735 6.991L12.553 6.995L12.369 6.998L12.185 6.999L12 7L11.815 6.999L11.631 6.998L11.447 6.995L11.265 6.991L11.083 6.985L10.902 6.979L10.723 6.972L10.544 6.963L10.366 6.953L10.19 6.943L10.014 6.931L9.839 6.918L9.666 6.904L9.494 6.889L9.323 6.873L9.153 6.856L8.984 6.838L8.817 6.819L8.651 6.799L8.486 6.778L8.323 6.755L8.161 6.732L8 6.708L7.841 6.684L7.684 6.658L7.528 6.631L7.373 6.603L7.22 6.575L7.069 6.545L6.919 6.515L6.771 6.483L6.625 6.451L6.48 6.418L6.337 6.384L6.196 6.35L6.056 6.314L5.919 6.278L5.783 6.241L5.649 6.203L5.517 6.164L5.387 6.125L5.259 6.084L5.133 6.043L5.009 6.002L4.887 5.959L4.767 5.916L4.65 5.872L4.534 5.828L4.421 5.782L4.309 5.736L4.2 5.69L4.094 5.642L3.989 5.594L3.887 5.546L3.787 5.496L3.69 5.447L3.595 5.396L3.502 5.345L3.412 5.293L3.325 5.241L3.24 5.188L3.157 5.135L3.077 5.081L3 5.027V9.18V9.18ZM11.74 1.001L11.483 1.005L11.229 1.01L10.979 1.018L10.732 1.029L10.488 1.041L10.247 1.055L10.01 1.071L9.777 1.089L9.546 1.11L9.32 1.132L9.096 1.155L8.876 1.181L8.66 1.208L8.448 1.236L8.238 1.267L8.033 1.299L7.831 1.332L7.633 1.366L7.439 1.402L7.248 1.44L7.061 1.478L6.878 1.518L6.699 1.559L6.524 1.601L6.352 1.644L6.184 1.687L6.021 1.732L5.861 1.778L5.706 1.824L5.554 1.872L5.406 1.92L5.263 1.968L5.124 2.017L4.988 2.067L4.857 2.117L4.731 2.168L4.608 2.219L4.49 2.27L4.376 2.322L4.266 2.374L4.16 2.426L4.059 2.478L3.963 2.53L3.871 2.582L3.783 2.634L3.7 2.686L3.621 2.738L3.547 2.789L3.477 2.841L3.412 2.892L3.352 2.942L3.296 2.992L3.245 3.042L3.222 3.067L3.199 3.091L3.178 3.115L3.158 3.14L3.139 3.164L3.121 3.188L3.104 3.211L3.089 3.235L3.075 3.258L3.062 3.281L3.05 3.304L3.04 3.327L3.03 3.349L3.022 3.371L3.016 3.394L3.01 3.415L3.006 3.437L3.002 3.458L3.001 3.479L3 3.5L3.001 3.521L3.002 3.542L3.006 3.563L3.01 3.585L3.016 3.606L3.022 3.629L3.03 3.651L3.04 3.673L3.05 3.696L3.062 3.719L3.075 3.742L3.089 3.765L3.104 3.789L3.121 3.812L3.139 3.836L3.158 3.86L3.178 3.885L3.199 3.909L3.222 3.933L3.245 3.958L3.296 4.008L3.352 4.058L3.412 4.108L3.477 4.159L3.547 4.211L3.621 4.262L3.7 4.314L3.783 4.366L3.871 4.418L3.963 4.47L4.059 4.522L4.16 4.574L4.266 4.626L4.376 4.678L4.49 4.73L4.608 4.781L4.731 4.832L4.857 4.883L4.988 4.933L5.124 4.983L5.263 5.032L5.406 5.08L5.554 5.128L5.706 5.176L5.861 5.222L6.021 5.268L6.184 5.313L6.352 5.356L6.524 5.399L6.699 5.441L6.878 5.482L7.061 5.522L7.248 5.56L7.439 5.598L7.633 5.634L7.831 5.668L8.033 5.701L8.238 5.733L8.448 5.764L8.66 5.792L8.876 5.819L9.096 5.845L9.32 5.868L9.546 5.89L9.777 5.911L10.01 5.929L10.247 5.945L10.488 5.959L10.732 5.971L10.979 5.982L11.229 5.99L11.483 5.995L11.74 5.999L12 6L12.26 5.999L12.517 5.995L12.771 5.99L13.021 5.982L13.268 5.971L13.512 5.959L13.753 5.945L13.99 5.929L14.223 5.911L14.454 5.89L14.68 5.868L14.904 5.845L15.124 5.819L15.34 5.792L15.552 5.764L15.762 5.733L15.967 5.701L16.169 5.668L16.367 5.634L16.561 5.598L16.752 5.56L16.939 5.522L17.122 5.482L17.301 5.441L17.476 5.399L17.648 5.356L17.816 5.313L17.979 5.268L18.139 5.222L18.294 5.176L18.446 5.128L18.594 5.08L18.737 5.032L18.876 4.983L19.012 4.933L19.143 4.883L19.269 4.832L19.392 4.781L19.51 4.73L19.624 4.678L19.734 4.626L19.84 4.574L19.941 4.522L20.037 4.47L20.129 4.418L20.217 4.366L20.3 4.314L20.379 4.262L20.453 4.211L20.523 4.159L20.588 4.108L20.648 4.058L20.704 4.008L20.755 3.958L20.778 3.933L20.801 3.909L20.822 3.885L20.842 3.86L20.861 3.836L20.879 3.812L20.896 3.789L20.911 3.765L20.925 3.742L20.938 3.719L20.95 3.696L20.96 3.673L20.97 3.651L20.978 3.629L20.984 3.606L20.99 3.585L20.994 3.563L20.998 3.542L20.999 3.521L21 3.5L20.999 3.479L20.998 3.458L20.994 3.437L20.99 3.415L20.984 3.394L20.978 3.371L20.97 3.349L20.96 3.327L20.95 3.304L20.938 3.281L20.925 3.258L20.911 3.235L20.896 3.211L20.879 3.188L20.861 3.164L20.842 3.14L20.822 3.115L20.801 3.091L20.778 3.067L20.755 3.042L20.704 2.992L20.648 2.942L20.588 2.892L20.523 2.841L20.453 2.789L20.379 2.738L20.3 2.686L20.217 2.634L20.129 2.582L20.037 2.53L19.941 2.478L19.84 2.426L19.734 2.374L19.624 2.322L19.51 2.27L19.392 2.219L19.269 2.168L19.143 2.117L19.012 2.067L18.876 2.017L18.737 1.968L18.594 1.92L18.446 1.872L18.294 1.824L18.139 1.778L17.979 1.732L17.816 1.687L17.648 1.644L17.476 1.601L17.301 1.559L17.122 1.518L16.939 1.478L16.752 1.44L16.561 1.402L16.367 1.366L16.169 1.332L15.967 1.299L15.762 1.267L15.552 1.236L15.34 1.208L15.124 1.181L14.904 1.155L14.68 1.132L14.454 1.11L14.223 1.089L13.99 1.071L13.753 1.055L13.512 1.041L13.268 1.029L13.021 1.018L12.771 1.01L12.517 1.005L12.26 1.001L12 1L11.74 1.001V1.001Z" fill="black"></path>
+</svg>
+</div><div class="h-5 group flex flex-col justify-center"><!----><!----><label class="name leading-4">Admin</label></div></div></div><!----><div id="V" class="lifeline absolute flex flex-col mx-2 transform -translate-x-1/2 h-full" data-v-6efc771f="" style="padding-top: 0px; left: 292px;"><div data-v-6efc771f="" style="display: none;">300</div><div class="participant bg-skin-participant border-skin-participant text-skin-participant rounded text-base leading-4 flex flex-col justify-center z-10 h-10 sticky top-8" data-v-6efc771f=""><div class="absolute left-1/2 transform -translate-x-1/2 -translate-y-full h-8 [&amp;>svg]:w-full [&amp;>svg]:h-full" alt="icon for V"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#clip0_544_54)">
+    <path d="M15.5489 4.19771C15.5489 5.18773 15.1485 6.13721 14.4358 6.83726C13.7231 7.53731 12.7565 7.93058 11.7486 7.93058C10.7407 7.93058 9.77403 7.53731 9.06133 6.83726C8.34863 6.13721 7.94824 5.18773 7.94824 4.19771C7.94824 3.20768 8.34863 2.25822 9.06133 1.55818C9.77403 0.858126 10.7407 0.464844 11.7486 0.464844C12.7565 0.464844 13.7231 0.858126 14.4358 1.55818C15.1485 2.25822 15.5489 3.20768 15.5489 4.19771Z" stroke="black"></path>
+    <path d="M6.54883 11.2152L17.2025 11.2073M11.7471 8.06641V19.5806V8.06641ZM11.7471 19.4385L6.79789 23.5738L11.7471 19.4385ZM11.7551 19.4385L17.1864 23.3055L11.7551 19.4385Z" stroke="black"></path>
+  </g>
+  <defs>
+    <clipPath id="clip0_544_54">
+      <rect width="24" height="24" fill="white"></rect>
+    </clipPath>
+  </defs>
+</svg>
+</div><div class="h-5 group flex flex-col justify-center"><!----><!----><label class="name leading-4">Voter</label></div></div></div><!----><div id="V2" class="lifeline absolute flex flex-col mx-2 transform -translate-x-1/2 h-full" data-v-6efc771f="" style="padding-top: 0px; left: 413px;"><div data-v-6efc771f="" style="display: none;">421</div><div class="participant bg-skin-participant border-skin-participant text-skin-participant rounded text-base leading-4 flex flex-col justify-center z-10 h-10 sticky top-8" data-v-6efc771f=""><div class="absolute left-1/2 transform -translate-x-1/2 -translate-y-full h-8 [&amp;>svg]:w-full [&amp;>svg]:h-full" alt="icon for V2"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#clip0_544_54)">
+    <path d="M15.5489 4.19771C15.5489 5.18773 15.1485 6.13721 14.4358 6.83726C13.7231 7.53731 12.7565 7.93058 11.7486 7.93058C10.7407 7.93058 9.77403 7.53731 9.06133 6.83726C8.34863 6.13721 7.94824 5.18773 7.94824 4.19771C7.94824 3.20768 8.34863 2.25822 9.06133 1.55818C9.77403 0.858126 10.7407 0.464844 11.7486 0.464844C12.7565 0.464844 13.7231 0.858126 14.4358 1.55818C15.1485 2.25822 15.5489 3.20768 15.5489 4.19771Z" stroke="black"></path>
+    <path d="M6.54883 11.2152L17.2025 11.2073M11.7471 8.06641V19.5806V8.06641ZM11.7471 19.4385L6.79789 23.5738L11.7471 19.4385ZM11.7551 19.4385L17.1864 23.3055L11.7551 19.4385Z" stroke="black"></path>
+  </g>
+  <defs>
+    <clipPath id="clip0_544_54">
+      <rect width="24" height="24" fill="white"></rect>
+    </clipPath>
+  </defs>
+</svg>
+</div><div class="h-5 group flex flex-col justify-center"><!----><!----><label class="name leading-4">Voter</label></div></div></div></div></div></div></div><div class="footer p-1 flex justify-between"><div class="flex items-center"><button class="bottom-1 left-1 hide-export"><svg class="filter grayscale" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" style="width: 1em; height: 1em; vertical-align: middle; fill: currentcolor; overflow: hidden;"><path d="M514 912c-219.9 0-398.8-178.9-398.8-398.9 0-219.9 178.9-398.8 398.8-398.8s398.9 178.9 398.9 398.8c-0.1 220-179 398.9-398.9 398.9z m0-701.5c-166.9 0-302.7 135.8-302.7 302.7S347.1 815.9 514 815.9s302.7-135.8 302.7-302.7S680.9 210.5 514 210.5z" fill="#BDD2EF"></path><path d="M431.1 502.4c-0.1 0.3 0.3 0.4 0.4 0.2 6.9-11.7 56.5-89.1 23.4 167.3-17.4 134.7 122.9 153.6 142.3-7.9 0.1-1-1.3-1.4-1.7-0.4-11.9 37.2-49.6 104.9-4.7-155.2 18.6-107.2-127.6-146-159.7-4z" fill="#2867CE"></path><path d="M541.3 328m-68 0a68 68 0 1 0 136 0 68 68 0 1 0-136 0Z" fill="#2867CE"></path></svg></button><input type="checkbox" id="order-display" class="ml-3 mr-1"><label for="order-display" title="Numbering the diagram" class="select-none">numbering</label></div><div class="zoom-controls bg-skin-base text-skin-control flex justify-between w-28 hide-export"><button class="zoom-in px-1">+</button><label>100 %</label><button class="zoom-out px-1">-</button></div><div class="invisible"><div class="message border-skin-message-arrow border-b-2 flex items-end flex-row-reverse right-to-left text-center" style="border-bottom-style: solid;"><div class="name group flex-grow text-sm hover:whitespace-normal hover:text-skin-message-hover hover:bg-skin-message-hover"><div class="inline-block relative min-h-[1em]">abcd <!----></div></div><div class="point text-skin-message-arrow fill right-to-left flex-shrink-0 transform translate-y-1/2 -my-px" data-v-ca07199a=""><!----><svg class="arrow stroke-2" height="10" width="10" data-v-ca07199a=""><polyline class="left head fill-current stroke-current" points="10,0 0,5 10,10" data-v-ca07199a=""></polyline></svg></div></div></div><a target="_blank" href="https://zenuml.com" class="brand text-skin-link absolute bottom-1 right-1 text-xs">ZenUML.com</a></div></div></div></div></div></foreignObject></svg></div><p>&nbsp;</p><h2 id='核心算法'><span>核心算法</span></h2><h3 id='核心算法-2'><span>核心算法</span></h3><p><span>核心代码详见：</span><code>cn.edu.hitsz.api.util.MPCUtils</code></p><h4 id='秘密构建-generatesecret'><span>秘密构建 generateSecret</span></h4><p><span>根据投票信息和投票人的数量构建秘密，如无特别声明，该算法的秘密指的是一个多精度的大整数，投票信息指的是投票者对候选人的投票分值。</span></p><p><span>例如：</span></p><ul><li><p><span>输入：</span></p><ul><li><p><span>voteList = [99, 80, 61]</span></p></li><li><p><span>m = 5</span></p></li></ul></li><li><p><span>输出：</span></p><ul><li><p><span>secret = 25993277</span></p></li><li><p><span>（二进制）001100011 001010000 000111101</span></p></li></ul></li></ul><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="java" style="break-inside: unset;"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51562px; left: 8px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><span><span>​</span>x</span></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">/**</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">* 根据投票信息和投票人的数量生成大整数秘密</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">*</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">* @param voteList 对各个候选人的投票信息</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">* @param m &nbsp; &nbsp; &nbsp;  参与投票的人数</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">* @return 秘密大整数</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">*/</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">private</span> <span class="cm-keyword">static</span> <span class="cm-variable">BigInteger</span> <span class="cm-def">generateSecret</span>(<span class="cm-variable-3">int</span>[] <span class="cm-variable">voteList</span>, <span class="cm-variable-3">int</span> <span class="cm-variable">m</span>) {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">// 计算比特长度，该长度的作用是避免后续的算法中长度溢出</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable-3">int</span> <span class="cm-variable">k</span> <span class="cm-operator">=</span> (<span class="cm-variable-3">int</span>) (<span class="cm-variable">Math</span>.<span class="cm-variable">log</span>(<span class="cm-variable">m</span> <span class="cm-operator">*</span> <span class="cm-variable">MAX_SCORE</span>) <span class="cm-operator">/</span> <span class="cm-variable">Math</span>.<span class="cm-variable">log</span>(<span class="cm-number">2</span>)) <span class="cm-operator">+</span> <span class="cm-number">1</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">// 将投票信息转换为大整数</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">BigInteger</span> <span class="cm-variable">result</span> <span class="cm-operator">=</span> <span class="cm-variable">BigInteger</span>.<span class="cm-variable">ZERO</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-keyword">for</span> (<span class="cm-variable-3">int</span> <span class="cm-variable">vote</span> : <span class="cm-variable">voteList</span>) {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">result</span> <span class="cm-operator">=</span> <span class="cm-variable">result</span>.<span class="cm-variable">shiftLeft</span>(<span class="cm-variable">k</span>).<span class="cm-variable">add</span>(<span class="cm-variable">BigInteger</span>.<span class="cm-variable">valueOf</span>(<span class="cm-variable">vote</span>));</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;  }</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-keyword">return</span> <span class="cm-variable">result</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  }</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 461px;"></div><div class="CodeMirror-gutters" style="display: none; height: 461px;"></div></div></div></pre><p>&nbsp;</p><h4 id='秘密恢复-recoversecret'><span>秘密恢复 recoverSecret</span></h4><p><span>秘密构建的逆操作，根据提供的候选人（参选者）和投票人（评审专家）信息恢复分发的秘密。</span></p><p><span>例如：</span></p><ul><li><p><span>输入：</span></p><ul><li><p><span>secret = 25993277</span></p></li><li><p><span>m = 5</span></p></li><li><p><span>n = 3</span></p></li></ul></li><li><p><span>输出：</span></p><ul><li><p><span>voteList = [99, 80, 61]</span></p></li></ul></li></ul><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="java" style="break-inside: unset;"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51562px; left: 8px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">/**</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">* 分割大整数，用于将分发出去的秘密恢复，是 generateSecret() 的逆操作</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">*</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">* @param result 投票的结果</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">* @param n &nbsp; &nbsp;  n个候选人</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">* @param m &nbsp; &nbsp;  m个投票人</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">* @return 每个候选人的票数</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">*/</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">public</span> <span class="cm-keyword">static</span> <span class="cm-variable-3">int</span>[] <span class="cm-def">recoverSecret</span>(<span class="cm-variable">BigInteger</span> <span class="cm-variable">result</span>,</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable-3">int</span> <span class="cm-variable">n</span>,</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable-3">int</span> <span class="cm-variable">m</span>) {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">// 将BigInteger转换为字符串</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable-3">String</span> <span class="cm-variable">numString</span> <span class="cm-operator">=</span> <span class="cm-variable">result</span>.<span class="cm-variable">toString</span>(<span class="cm-number">2</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">// 计算每份的位数</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable-3">int</span> <span class="cm-variable">partLength</span> <span class="cm-operator">=</span> (<span class="cm-variable-3">int</span>) (<span class="cm-variable">Math</span>.<span class="cm-variable">log</span>(<span class="cm-variable">m</span> <span class="cm-operator">*</span> <span class="cm-variable">MAX_SCORE</span>) <span class="cm-operator">/</span> <span class="cm-variable">Math</span>.<span class="cm-variable">log</span>(<span class="cm-number">2</span>)) <span class="cm-operator">+</span> <span class="cm-number">1</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">// 创建存储结果的int数组</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable-3">int</span>[] <span class="cm-variable">ret</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable-3">int</span>[<span class="cm-variable">n</span>];</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">// 将每份的数字存储到数组中</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-keyword">for</span> (<span class="cm-variable-3">int</span> <span class="cm-variable">i</span> <span class="cm-operator">=</span> <span class="cm-number">0</span>; <span class="cm-variable">i</span> <span class="cm-operator">&lt;</span> <span class="cm-variable">n</span>; <span class="cm-variable">i</span><span class="cm-operator">++</span>) {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">// 提取每份的起始和结束索引</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable-3">int</span> <span class="cm-variable">endIndex</span> <span class="cm-operator">=</span> <span class="cm-variable">numString</span>.<span class="cm-variable">length</span>() <span class="cm-operator">-</span> <span class="cm-variable">i</span> <span class="cm-operator">*</span> <span class="cm-variable">partLength</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable-3">int</span> <span class="cm-variable">startIndex</span> <span class="cm-operator">=</span> <span class="cm-variable">Math</span>.<span class="cm-variable">max</span>(<span class="cm-variable">endIndex</span> <span class="cm-operator">-</span> <span class="cm-variable">partLength</span>, <span class="cm-number">0</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">// 截取每份的字符串并转换为int类型</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable-3">String</span> <span class="cm-variable">partString</span> <span class="cm-operator">=</span> <span class="cm-variable">numString</span>.<span class="cm-variable">substring</span>(<span class="cm-variable">startIndex</span>, <span class="cm-variable">endIndex</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable-3">int</span> <span class="cm-variable">partNum</span> <span class="cm-operator">=</span> <span class="cm-variable-3">Integer</span>.<span class="cm-variable">parseInt</span>(<span class="cm-variable">partString</span>, <span class="cm-number">2</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">// 将每份的数字存储到数组中</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">ret</span>[<span class="cm-variable">n</span> <span class="cm-operator">-</span> <span class="cm-number">1</span> <span class="cm-operator">-</span> <span class="cm-variable">i</span>] <span class="cm-operator">=</span> <span class="cm-variable">partNum</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;  }</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">// 返回结果数组</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-keyword">return</span> <span class="cm-variable">ret</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  }</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 898px;"></div><div class="CodeMirror-gutters" style="display: none; height: 898px;"></div></div></div></pre><p>&nbsp;</p><h4 id='秘密分享-secretshare'><span>秘密分享 secretShare</span></h4><p><span>算法的关键，下面将重点阐述该部分内容：</span></p><p><span>二维数组 scores 表示评审专家（投票者）对所有候选人的打分情况，</span><code>scores[i][j]</code><span> 表示该专家对第 j 个候选人的第 i 个评分维度打分的结果。</span></p><p><span>randomSplit() 的作用是将输入的多精度整数分解为 m 份，这 m 份的份额是随机的，但是保证它们的和恰好为这个多精度整数。</span></p><p><span>secretShare 的主要步骤是：</span></p><ol start='' ><li><p><span>通过 generateSecret() 将传入的</span><strong><span>每一行</span></strong><span>（专家对所有候选人的某一个评分维度打分的结果向量）构建一个大整数 secret；</span></p></li><li><p><span>通过 randomSplit() 将构建的大整数 secret 分割成 m 个（即专家数量）随机的子秘密，保证它们之和为 secret；</span></p></li><li><p><span>通过网络，将子秘密分发给每一个评审专家（包括自己）。</span></p></li></ol><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="java" style="break-inside: unset;"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="java"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51562px; left: 8px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">/**</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">* 秘密分享</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">*</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">* @param targets 目标地址</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">* @param scores  投票信息，第一维度(i)是项目，第二维度(j)是候选人</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">* @param addr &nbsp;  本机地址</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">*/</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">public</span> <span class="cm-keyword">static</span> <span class="cm-variable-3">void</span> <span class="cm-def">secretShare</span>(<span class="cm-variable">List</span><span class="cm-operator">&lt;</span><span class="cm-variable-3">String</span><span class="cm-operator">&gt;</span> <span class="cm-variable">targets</span>,</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="cm-variable-3">int</span>[][] <span class="cm-variable">scores</span>,</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="cm-variable-3">String</span> <span class="cm-variable">addr</span>) <span class="cm-keyword">throws</span> <span class="cm-variable">UnsupportedEncodingException</span> {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">// 将秘密随机分割，保证所有的子秘密的和为创建的 secret</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">List</span><span class="cm-operator">&lt;</span><span class="cm-variable">List</span><span class="cm-operator">&lt;</span><span class="cm-variable">BigInteger</span><span class="cm-operator">&gt;&gt;</span> <span class="cm-variable">result</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">ArrayList</span><span class="cm-operator">&lt;&gt;</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-keyword">for</span> (<span class="cm-variable-3">int</span>[] <span class="cm-variable">score</span> : <span class="cm-variable">scores</span>) {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">List</span><span class="cm-operator">&lt;</span><span class="cm-variable">BigInteger</span><span class="cm-operator">&gt;</span> <span class="cm-variable">subSecrets</span> <span class="cm-operator">=</span> <span class="cm-variable">randomSplit</span>(<span class="cm-variable">generateSecret</span>(<span class="cm-variable">score</span>, <span class="cm-variable">targets</span>.<span class="cm-variable">size</span>()), <span class="cm-variable">targets</span>.<span class="cm-variable">size</span>());</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">result</span>.<span class="cm-variable">add</span>(<span class="cm-variable">subSecrets</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;  }</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">// 将子秘密分发给所有的投票者（含自己）</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-keyword">for</span> (<span class="cm-variable-3">int</span> <span class="cm-variable">i</span> <span class="cm-operator">=</span> <span class="cm-number">0</span>; <span class="cm-variable">i</span> <span class="cm-operator">&lt;</span> <span class="cm-variable">result</span>.<span class="cm-variable">size</span>(); <span class="cm-variable">i</span><span class="cm-operator">++</span>) {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">List</span><span class="cm-operator">&lt;</span><span class="cm-variable">BigInteger</span><span class="cm-operator">&gt;</span> <span class="cm-variable">toBeSent</span> <span class="cm-operator">=</span> <span class="cm-variable">result</span>.<span class="cm-variable">get</span>(<span class="cm-variable">i</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">System</span>.<span class="cm-variable">out</span>.<span class="cm-variable">printf</span>(<span class="cm-string">"Send [%s] to [%s]...\n"</span>, <span class="cm-variable">toBeSent</span>, <span class="cm-variable">targets</span>.<span class="cm-variable">get</span>(<span class="cm-variable">i</span>));</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">HttpUtils</span>.<span class="cm-variable">httpPostRequest</span>(</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">targets</span>.<span class="cm-variable">get</span>(<span class="cm-variable">i</span>),</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">Map</span>.<span class="cm-variable">of</span>(<span class="cm-string">"data"</span>, <span class="cm-variable">toBeSent</span>, <span class="cm-string">"addr"</span>, <span class="cm-variable">addr</span>)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  );</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;  }</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  }</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-comment">/**</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">* 将大整数随机分解成 m 份，他们的和为 secret</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; <span class="cm-comment">*/</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">private</span> <span class="cm-keyword">static</span> <span class="cm-variable">List</span><span class="cm-operator">&lt;</span><span class="cm-variable">BigInteger</span><span class="cm-operator">&gt;</span> <span class="cm-def">randomSplit</span>(<span class="cm-variable">BigInteger</span> <span class="cm-variable">number</span>, <span class="cm-variable-3">int</span> <span class="cm-variable">m</span>) {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">Random</span> <span class="cm-variable">random</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">SecureRandom</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">List</span><span class="cm-operator">&lt;</span><span class="cm-variable">BigInteger</span><span class="cm-operator">&gt;</span> <span class="cm-variable">delimiters</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">ArrayList</span><span class="cm-operator">&lt;&gt;</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">delimiters</span>.<span class="cm-variable">add</span>(<span class="cm-variable">BigInteger</span>.<span class="cm-variable">ZERO</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-keyword">for</span> (<span class="cm-variable-3">int</span> <span class="cm-variable">i</span> <span class="cm-operator">=</span> <span class="cm-number">0</span>; <span class="cm-variable">i</span> <span class="cm-operator">&lt;</span> <span class="cm-variable">m</span> <span class="cm-operator">-</span> <span class="cm-number">1</span>; <span class="cm-variable">i</span><span class="cm-operator">++</span>) {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">BigInteger</span> <span class="cm-variable">delimiter</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">BigInteger</span>(<span class="cm-variable">number</span>.<span class="cm-variable">bitLength</span>(), <span class="cm-variable">random</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">delimiters</span>.<span class="cm-variable">add</span>(<span class="cm-variable">delimiter</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;  }</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">delimiters</span>.<span class="cm-variable">add</span>(<span class="cm-variable">number</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">List</span><span class="cm-operator">&lt;</span><span class="cm-variable">BigInteger</span><span class="cm-operator">&gt;</span> <span class="cm-variable">result</span> <span class="cm-operator">=</span> <span class="cm-keyword">new</span> <span class="cm-variable">ArrayList</span><span class="cm-operator">&lt;&gt;</span>();</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-keyword">for</span> (<span class="cm-variable-3">int</span> <span class="cm-variable">i</span> <span class="cm-operator">=</span> <span class="cm-number">1</span>; <span class="cm-variable">i</span> <span class="cm-operator">&lt;</span> <span class="cm-variable">delimiters</span>.<span class="cm-variable">size</span>(); <span class="cm-variable">i</span><span class="cm-operator">++</span>) {</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">BigInteger</span> <span class="cm-variable">left</span> <span class="cm-operator">=</span> <span class="cm-variable">delimiters</span>.<span class="cm-variable">get</span>(<span class="cm-variable">i</span> <span class="cm-operator">-</span> <span class="cm-number">1</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">BigInteger</span> <span class="cm-variable">right</span> <span class="cm-operator">=</span> <span class="cm-variable">delimiters</span>.<span class="cm-variable">get</span>(<span class="cm-variable">i</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">BigInteger</span> <span class="cm-variable">part</span> <span class="cm-operator">=</span> <span class="cm-variable">right</span>.<span class="cm-variable">subtract</span>(<span class="cm-variable">left</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-variable">result</span>.<span class="cm-variable">add</span>(<span class="cm-variable">part</span>);</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp;  }</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-keyword">return</span> <span class="cm-variable">result</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  }</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 1336px;"></div><div class="CodeMirror-gutters" style="display: none; height: 1336px;"></div></div></div></pre><p><span>后续，每个评审专家将收到的共 m 个子秘密向量加和，然后将加和得到的向量 X （x 维向量，长度为评分维度数）发送给管理中心。管理中心通过对收到的共 m 个向量 X 进行加和，得到最终的和向量（x 维），对向量中的每一个数经过秘密恢复 recoverSecret()，得到各个候选人在每个维度的得分。</span></p><p><span>下面将给出一个示例（2专家、3项目组）演示数据的变化：</span></p><ol start='' ><li><p><span>投票者的投票矩阵：</span></p><figure class='table-figure'><table><thead><tr><th>&nbsp;</th><th><span>项目1</span></th><th><span>项目2</span></th><th><span>项目3</span></th></tr></thead><tbody><tr><td><span>创新性a</span></td><td><span>32</span></td><td><span>39</span></td><td><span>28</span></td></tr><tr><td><span>技术性b</span></td><td><span>39</span></td><td><span>35</span></td><td><span>31</span></td></tr><tr><td><span>实用性c</span></td><td><span>16</span></td><td><span>18</span></td><td><span>13</span></td></tr></tbody></table></figure></li><li><p><span>经过 generateSecret + randomSplit 后的矩阵：</span></p><figure class='table-figure'><table><thead><tr><th>&nbsp;</th><th><span>发给专家1</span></th><th><span>发给专家2</span></th></tr></thead><tbody><tr><td><span>创新型a</span></td><td><span>1075343</span></td><td><span>1031821</span></td></tr><tr><td><span>技术性b</span></td><td><span>2111548</span></td><td><span>453347</span></td></tr><tr><td><span>实用性c</span></td><td><span>278839</span></td><td><span>774358</span></td></tr></tbody></table></figure><p><span>11 111100101 011011100</span></p><p><span>假如另一专家的矩阵如下：</span></p><figure class='table-figure'><table><thead><tr><th>&nbsp;</th><th><span>发给专家1</span></th><th><span>发给专家2</span></th></tr></thead><tbody><tr><td><span>创新型a</span></td><td><span>187043</span></td><td><span>1458809</span></td></tr><tr><td><span>技术性b</span></td><td><span>2028171</span></td><td><span>405652</span></td></tr><tr><td><span>实用性c</span></td><td><span>1260768</span></td><td><span>447791</span></td></tr></tbody></table></figure></li><li><p><span>专家1将会收到两向量：</span></p><figure class='table-figure'><table><thead><tr><th><span>向量</span></th><th><span>创新型a</span></th><th><span>技术性b</span></th><th><span>实用性c</span></th></tr></thead><tbody><tr><td><span>1</span></td><td><span>1075343</span></td><td><span>2111548</span></td><td><span>278839</span></td></tr><tr><td><span>2</span></td><td><span>187043</span></td><td><span>2028171</span></td><td><span>1260768</span></td></tr><tr><td><span>求和</span></td><td><span>1262386</span></td><td><span>4139719</span></td><td><span>1539607</span></td></tr></tbody></table></figure><p><span>将求和结果发送给管理中心公开。</span></p></li><li><p><span>管理中心</span></p><figure class='table-figure'><table><thead><tr><th>&nbsp;</th><th><span>来自专家1</span></th><th><span>来自专家2</span></th><th><span>求和</span></th></tr></thead><tbody><tr><td><span>创新型a</span></td><td><span>1262386</span></td><td><span>2490630</span></td><td><span>3753016</span></td></tr><tr><td><span>技术性b</span></td><td><span>4139719</span></td><td><span>858999</span></td><td><span>4998718</span></td></tr><tr><td><span>实用性c</span></td><td><span>1539607</span></td><td><span>1222149</span></td><td><span>2761756</span></td></tr></tbody></table></figure><p><span>将求和结果分别经过秘密恢复 recoverSecret()，得到：</span></p><figure class='table-figure'><table><thead><tr><th>&nbsp;</th><th><span>项目1</span></th><th><span>项目2</span></th><th><span>项目3</span></th></tr></thead><tbody><tr><td><span>创新型a</span></td><td><span>57</span></td><td><span>68</span></td><td><span>56</span></td></tr><tr><td><span>技术性b</span></td><td><span>76</span></td><td><span>70</span></td><td><span>62</span></td></tr><tr><td><span>实用性c</span></td><td><span>42</span></td><td><span>36</span></td><td><span>28</span></td></tr></tbody></table></figure></li></ol><p>&nbsp;</p></div></div>
+</body>
+</html>

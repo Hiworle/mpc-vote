@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
+ * 用于发送 Http 请求
+ *
  * @author hope
  * @date 2023/9/9 - 10:47
  */
