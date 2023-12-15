@@ -1,5 +1,6 @@
 package cn.edu.hitsz.admin.controller;
 
+import cn.edu.hitsz.api.entity.ScoringItem;
 import cn.edu.hitsz.api.entity.VoteResult;
 import cn.edu.hitsz.api.entity.VoteStatus;
 import cn.edu.hitsz.api.entity.po.Candidate;
@@ -41,16 +42,44 @@ public class AdminController {
                     .build()
     );
 
+    public static final List<ScoringItem> scoringItems = List.of(
+            ScoringItem.builder()
+                    .id(0)
+                    .name("创新型")
+                    .description("评估参赛项目在人工智能应用领域的创新程度。考虑项目是否引入了新的思路、方法或技术，并且能够为现有问题提供新的解决方案。")
+                    .score(30)
+                    .build(),
+            ScoringItem.builder()
+                    .id(1)
+                    .name("实用性")
+                    .description("评估参赛项目在实际应用中的可行性和实用性。考虑项目是否能够解决实际问题，并且对现有或未来的人工智能应用具有积极的影响。")
+                    .score(30)
+                    .build(),
+            ScoringItem.builder()
+                    .id(2)
+                    .name("技术复杂性")
+                    .description("评估参赛项目所涉及的技术难度和复杂性。考虑项目是否在算法、模型设计或系统开发方面具有一定的挑战性，并且需要高水平的技术能力来实现。")
+                    .score(20)
+                    .build()
+    );
+
+
     private static volatile VoteStatus status = VoteStatus.START;
 
     private static final Set<String> committedVoters = new HashSet<>();
 
     // 用于计票
-    private static final Map<Integer, BigInteger> tallyMap = new HashMap<>();
+    private static final Map<Integer, BigInteger[]> tallyMap = new HashMap<>();
 
     private static VoteResult voteResult = null;
 
     private final ObjectMapper mapper = new ObjectMapper();
+
+    @GetMapping("/list-scoring-items")
+    public List<ScoringItem> getScoringItemList() {
+        return scoringItems;
+    }
+
 
     @GetMapping("/list-voters")
     public Collection<Voter> getVoterList() {
@@ -89,9 +118,9 @@ public class AdminController {
             voterMap.keySet().parallelStream().forEach(
                     addr -> {
                         try {
-                            BigInteger tally = mapper.readValue(
+                            BigInteger[] tally = mapper.readValue(
                                     HttpUtils.httpPostRequest("http://" + addr + "/tally"),
-                                    BigInteger.class);
+                                    BigInteger[].class);
                             tallyMap.put(voterMap.get(addr).getId(), tally);
                         } catch (JsonProcessingException e) {
                             throw new RuntimeException(e);
@@ -102,43 +131,47 @@ public class AdminController {
             // 计算结果
             voteResult = new VoteResult();
             voteResult.setTallyMap(tallyMap);
-            tallyMap.values().stream().reduce(BigInteger::add).ifPresent(
-                    result -> {
-                        voteResult.setResult(result);
-                        int[] arr = MPCUtils.divide(result, candidateList.size(), voterMap.size());
-                        IntStream.range(0, arr.length)
-                                .reduce((i, j) -> arr[i] > arr[j] ? i : j)
-                                .ifPresent(
-                                        i -> {
-                                            voteResult.setWinner(candidateList.get(i));
-                                            voteResult.setVoteArray(arr);
-                                        }
-                                );
-                    }
-            );
+            List<BigInteger[]> itemTally = tallyMap.values().stream().toList();
+            BigInteger[] result = new BigInteger[scoringItems.size()];
+            for (int i = 0; i < scoringItems.size(); i++) {
+                BigInteger sum = BigInteger.ZERO;
+                for (BigInteger[] bigIntegers : itemTally) {
+                    sum = sum.add(bigIntegers[i]);
+                }
+                result[i] = sum;
+            }
+            voteResult.setResult(result);
+            int[][] detailedResult = new int[scoringItems.size()][];
+            for (int i = 0; i < result.length; i++) {
+                int[] divide = MPCUtils.divide(result[i], candidateList.size(), voterMap.size());
+                detailedResult[i] = divide;
+            }
+            voteResult.setDetailedResult(detailedResult);
+
+            // 计算参加者的得分总和情况
+            int[] voteArray = new int[candidateList.size()];
+            for (int i = 0; i < candidateList.size(); i++) {
+                int sum = 0;
+                for (int j = 0; j < detailedResult.length; j++) {
+                    sum += detailedResult[j][i];
+                }
+                voteArray[i] = sum;
+            }
+            voteResult.setVoteArray(voteArray);
+
+            // 计算胜者
+            IntStream.range(0, voteArray.length)
+                   .reduce((i, j) -> voteArray[i] > voteArray[j]? i : j)
+                   .ifPresent(
+                            i -> voteResult.setWinner(candidateList.get(i))
+                    );
+
             status = VoteStatus.FINISHED;
             return "投票结束";
         } else {
             return "投票中";
         }
     }
-
-//    @PostMapping("/tally")
-//    public String tally(HttpServletRequest request, BigInteger data) {
-//        if (status != VoteStatus.TALLYING) {
-//            return "计票还未开始";
-//        }
-//        Voter voter = voterMap.get(MPCUtils.parseAddr(request));
-//        if (voter == null) return "投票人不存在";
-//
-//        tallyMap.put(voter.getId(), data);
-//        if (tallyMap.size() == voterMap.size()) {
-//            status = VoteStatus.FINISHED;
-//            return "计票结束";
-//        } else {
-//            return "计票中";
-//        }
-//    }
 
     @GetMapping("/status")
     public VoteStatus getStatus() {

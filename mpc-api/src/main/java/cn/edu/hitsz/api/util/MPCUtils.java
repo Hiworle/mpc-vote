@@ -35,15 +35,15 @@ public class MPCUtils {
         // 将每份的数字存储到数组中
         for (int i = 0; i < n; i++) {
             // 提取每份的起始和结束索引
-            int startIndex = i * partLength;
-            int endIndex = (i == n - 1) ? numString.length() : (i + 1) * partLength;
+            int endIndex = numString.length() - i * partLength;
+            int startIndex = Math.max(endIndex - partLength, 0);
 
             // 截取每份的字符串并转换为int类型
             String partString = numString.substring(startIndex, endIndex);
             int partNum = Integer.parseInt(partString, 2);
 
             // 将每份的数字存储到数组中
-            ret[i] = partNum;
+            ret[n - 1 - i] = partNum;
         }
 
         // 返回结果数组
@@ -53,7 +53,7 @@ public class MPCUtils {
     /**
      * 根据投票信息和投票人的数量生成大整数秘密
      */
-    private static BigInteger generateSecret(List<Integer> voteList, int m) {
+    private static BigInteger generateSecret(int[] voteList, int m) {
 
         // 比特长度
         int k = (int) (Math.log(m * MAX_SCORE) / Math.log(2)) + 1;
@@ -63,6 +63,8 @@ public class MPCUtils {
             result = result.shiftLeft(k).add(BigInteger.valueOf(vote));
         }
 
+        divide(result, 3, m);
+
         return result;
     }
 
@@ -70,16 +72,23 @@ public class MPCUtils {
      * 秘密分享
      */
     public static void secretShare(List<String> targets,
-                                   List<Integer> voteList,
+                                   int[][] scores,
                                    String addr) throws UnsupportedEncodingException {
 
-        List<BigInteger> secrets = randomSplit(generateSecret(voteList, targets.size()), targets.size());
 
-        for (int i = 0; i < targets.size(); i++) {
-            System.out.printf("Send [%s] to [%s]...\n", secrets.get(i).toString(2), targets.get(i));
+        // 随机分割
+        List<List<BigInteger>> result = new ArrayList<>();
+        for (int[] score : scores) {
+            List<BigInteger> secrets = randomSplit(generateSecret(score, targets.size()), targets.size());
+            result.add(secrets);
+        }
+
+        for (int i = 0; i < result.size(); i++) {
+            List<BigInteger> toBeSent = result.get(i);
+            System.out.printf("Send [%s] to [%s]...\n", toBeSent, targets.get(i));
             HttpUtils.httpPostRequest(
                     targets.get(i),
-                    Map.of("data", secrets.get(i), "addr", addr)
+                    Map.of("data", toBeSent, "addr", addr)
             );
         }
     }

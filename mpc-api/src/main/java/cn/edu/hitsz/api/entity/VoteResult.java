@@ -15,10 +15,15 @@ import java.util.Map;
 @AllArgsConstructor
 public class VoteResult {
 
-    private Map<Integer, BigInteger> tallyMap;
+    private Map<Integer, BigInteger[]> tallyMap;
 
-    private BigInteger result;
+    // 每个项目下求和结果（未分割）
+    private BigInteger[] result;
 
+    // 每个项目下得分情况，第一维是项目，第二维是候选人
+    private int[][] detailedResult;
+
+    // 每个参赛者的得分总和
     private int[] voteArray;
 
     private Candidate winner;
