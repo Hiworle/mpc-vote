@@ -90,7 +90,7 @@ zenuml
      * @param m        参与投票的人数
      * @return 秘密大整数
      */
-    private static BigInteger generateSecret(int[] voteList, int m) {
+    public static BigInteger generateSecret(int[] voteList, int m) {
 
         // 计算比特长度，该长度的作用是避免后续的算法中长度溢出
         int k = (int) (Math.log(m * MAX_SCORE) / Math.log(2)) + 1;
@@ -181,7 +181,7 @@ secretShare 的主要步骤是：
      * 秘密分享
      *
      * @param targets 目标地址
-     * @param scores  投票信息，第一维度(i)是项目，第二维度(j)是候选人
+     * @param scores  投票信息，第一维度是项目，第二维度是候选人
      * @param addr    本机地址
      */
     public static void secretShare(List<String> targets,
@@ -190,18 +190,22 @@ secretShare 的主要步骤是：
 
 
         // 将秘密随机分割，保证所有的子秘密的和为创建的 secret
-        List<List<BigInteger>> result = new ArrayList<>();
-        for (int[] score : scores) {
-            List<BigInteger> subSecrets = randomSplit(generateSecret(score, targets.size()), targets.size());
-            result.add(subSecrets);
+        BigInteger[][] result = new BigInteger[scores.length][];
+        for (int i = 0; i < scores.length; i++) {
+            int[] score = scores[i];
+            BigInteger[] subSecrets = randomSplit(generateSecret(score, targets.size()), targets.size());
+            result[i] = subSecrets;
         }
 
         // 将子秘密分发给所有的投票者（含自己）
-        for (int i = 0; i < result.size(); i++) {
-            List<BigInteger> toBeSent = result.get(i);
-            System.out.printf("Send [%s] to [%s]...\n", toBeSent, targets.get(i));
+        for (int j = 0; j < result[0].length; j++) {
+            List<BigInteger> toBeSent = new ArrayList<>();
+            for (int i = 0; i < result.length; i++) {
+                toBeSent.add(result[i][j]);
+            }
+            System.out.printf("Send [%s] to [%s]...\n", toBeSent, targets.get(j));
             HttpUtils.httpPostRequest(
-                    targets.get(i),
+                    targets.get(j),
                     Map.of("data", toBeSent, "addr", addr)
             );
         }
@@ -210,23 +214,15 @@ secretShare 的主要步骤是：
     /**
      * 将大整数随机分解成 m 份，他们的和为 secret
      */
-    private static List<BigInteger> randomSplit(BigInteger number, int m) {
+    private static BigInteger[] randomSplit(BigInteger number, int m) {
         Random random = new SecureRandom();
-        List<BigInteger> delimiters = new ArrayList<>();
-        delimiters.add(BigInteger.ZERO);
+        BigInteger[] result = new BigInteger[m];
+        BigInteger remain = number;
         for (int i = 0; i < m - 1; i++) {
-            BigInteger delimiter = new BigInteger(number.bitLength(), random);
-            delimiters.add(delimiter);
+            result[i] = new BigInteger(number.bitLength(), random);
+            remain = remain.subtract(result[i]);
         }
-        delimiters.add(number);
-
-        List<BigInteger> result = new ArrayList<>();
-        for (int i = 1; i < delimiters.size(); i++) {
-            BigInteger left = delimiters.get(i - 1);
-            BigInteger right = delimiters.get(i);
-            BigInteger part = right.subtract(left);
-            result.add(part);
-        }
+        result[m - 1] = remain;
 
         return result;
     }
